@@ -6,7 +6,10 @@ import { AppComponent } from './app.component';
 import { NgxGaugeModule } from 'ngx-gauge';
 import {SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { ViewDataComponent } from './components/view-data/view-data.component';
-const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
+import { HttpClientModule } from '@angular/common/http';
+const config: SocketIoConfig = {
+  url: 'http://localhost:3001',
+  options: {} };
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
     BrowserModule,
     AppRoutingModule,
     NgxGaugeModule,
-    SocketIoModule.forRoot(config)
+
+    SocketIoModule.forRoot(config),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,339 @@
+
+
+<div  class="container" >
+  <div class = "contaminantsContiner">
+    <!-- este contenedor de cont...__Grid engloba los medidores y la gráfica -->
+    <div class="contacontaminantsContiner__Grid" >
+      <!--   -->
+      <div class="flex-container">
+
+        <div class="contaminatLevel contaminatLevel--smallWidth">
+                  <h4 class="contaminatLevel__title contaminatLevel__title--small">Pm1</h4>
+                  <div class="contaminatLevel__gauge">
+                          <ngx-gauge
+                          [value]="pm1"
+                          type="arch"
+                          [thick]="8"
+                          cap="round"
+                          [max]=300
+                          [size]=73
+                          backgroundColor = "rgba(0, 0, 0, 0.2)"
+                          foregroundColor="#3333ff"
+                          >
+                          </ngx-gauge>
+                    <span class="contaminatLevel__levelUnit" >ug/m3 </span>
+                </div>
+        </div>
+
+        <div class="contaminatLevel contaminatLevel--smallWidth">
+              <h4 class="contaminatLevel__title contaminatLevel__title--small" >Pm2_5</h4>
+              <div class="contaminatLevel__gauge">
+                            <ngx-gauge
+                          [value]="pm2_5"
+                          type="arch"
+                          [thick]="8"
+                          cap="round"
+                          [max]=300
+                          [size]=72
+                          backgroundColor = "rgba(0, 0, 0, 0.2)"
+                          foregroundColor="#ce929d"
+                          >
+                        </ngx-gauge>
+                  <span class="contaminatLevel__levelUnit">ug/m3</span>
+              </div>
+
+        </div>
+
+        <div class="contaminatLevel contaminatLevel--smallWidth">
+                <h4 class="contaminatLevel__title contaminatLevel__title--small" >Pm10</h4>
+                <div class="contaminatLevel__gauge">
+                          <ngx-gauge
+                        [value]="pm10"
+                        type="arch"
+                        [thick]="8"
+                        cap="round"
+                        [max]=300
+                        [size]=72
+                        backgroundColor = "rgba(0, 0, 0, 0.2)"
+                        foregroundColor="#4c195a"
+                        >
+                      </ngx-gauge>
+                    <span class="contaminatLevel__levelUnit" >ug/m3</span>
+                </div>
+
+        </div>
+      </div>
+
+   <!-- width="3000px" height="600px" para 1200
+        width="2000px" height="600px"
+        class="c"
+  -->
+   <div class="chart-container" >
+    <canvas id="particula"  ></canvas>
+  </div>
+
+
+    </div>
+    <!-- grupo b -->
+    <div class="envSenContainer" >
+      <div class="flex-container paddingBottomGroubBox"  >
+
+        <div class="contaminatLevel contaminatLevel--mediumWidth">
+          <h2 class="contaminatLevel__title contaminatLevel__title--big" >O2</h2>
+          <div class="contaminatLevel__gauge">
+
+            <ngx-gauge
+            [value]="0.095"
+             type="arch"
+             [thick]="8"
+             cap="round"
+             [max]=1
+             [size]=100
+             backgroundColor = "rgba(0, 0, 0, 0.2)"
+             foregroundColor="#0077b6"
+            >
+          </ngx-gauge>
+          <span class="contaminatLevel__levelUnit contaminatLevel__levelUnit--big" >ppm </span>
+          </div>
+
+        </div>
+
+        <div class="contaminatLevel contaminatLevel--mediumWidth">
+          <h2 class="contaminatLevel__title contaminatLevel__title--big" >Ozono</h2>
+          <div class="contaminatLevel__gauge">
+
+            <ngx-gauge
+            [value]="o3value"
+             type="arch"
+             [thick]="8"
+             cap="round"
+             [max]=100
+             [size]=100
+             backgroundColor = "rgba(0, 0, 0, 0.2)"
+             foregroundColor="#0077b6"
+
+            >
+          </ngx-gauge>
+          <span class="contaminatLevel__levelUnit contaminatLevel__levelUnit--big" >ppm </span>
+          </div>
+
+        </div>
+
+      </div>
+      <div>
+
+
+      <div   class="fullContainer-uv flex-container marginTopGroubBox">
+        <!-- gauge -->
+
+          <div class="contaminatLevel contaminatLevel--mediumWidth paddingBottonGroubBox">
+            <h2 class="contaminatLevel__title contaminatLevel__title--big"  >Rayos uv</h2>
+            <div class="contaminatLevel__gauge">
+
+              <ngx-gauge
+              [value]="ryValue"
+               type="arch"
+               [thick]="8"
+               cap="round"
+               [max]=11
+               [size]=100
+               backgroundColor = "rgba(0, 0, 0, 0.2)"
+               foregroundColor="#0077b6"
+              >
+            </ngx-gauge>
+            <span class="contaminatLevel__levelUnit contaminatLevel__levelUnit--big" >ppm </span>
+            </div>
+
+          </div>
+
+
+        <!-- uv intenstity table  -->
+        <div class="tableV" >
+
+          <table  >
+            <thead>
+
+              <tr class="">
+                <th> Time </th>
+                <th> Uv intenstity </th>
+              </tr>
+
+
+            </thead>
+            <tbody>
+              <tr *ngFor="let dato of weather_dataDB; let iControl =index ">
+
+              <td> {{ dato.hora}} </td>
+              <td> {{ dato.uv}} </td>
+            </tr>
+
+
+
+
+
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+    </div>
+
+  </div> <!-- este es el más grande , clase yotta -->
+
+
+  <!-- este es el nuevo , conti0en weather data and temperatura and precipitaion   -->
+  <div class="weather-container">
+
+    <div class="windInfo" >
+        <div  class="tableWS"  >
+          <table  >
+<thead></thead>
+            <tbody class="tbodyWS">
+              <div style="width: 100%; display: flex; flex-wrap: wrap;">
+                <span *ngFor="let data2 of weather_dataDB" class="grid-item">
+                    <span class="hrtableWS">{{ data2.windSpeed }}km/hr</span>
+                </span>
+            </div>
+                    <tr  style=" width:100%;  display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
+                    gap: 10px; "   >
+                      <td class="hrtableWS"   *ngFor="let datas3 of weather_dataDB" > </td>
+                      <td >{{ data.windDirection }}</td>
+                    </tr>
+                    <tr  *ngFor="let data4 of weather_dataDB"  style=" width:100%;  display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
+                    gap: 10px; " >
+                      <td class="hrtableWS"   >  {{ data4.hora }}  </td>
+
+                    </tr>
+                    <tr   >
+                      <td   >  quiero ver si es verdad qe  </td>
+                      <td   >  quiero ver si es verdad qe  </td>
+
+                    </tr>
+          </tbody>
+      </table>
+        </div>
+
+        <div class="flex-container marginTopGroubBox" >
+            <div class="contaminatLevel contaminatLevel--mediumWidth"  >
+
+                <h2 class ="contaminatLevel__title contaminatLevel__title--big" >Wind Speed</h2>
+                      <div class="flex-container contaminatLevel__gauge">
+                          <ngx-gauge
+                          [value]="windSpeed"
+                          type="semi"
+                          [thick]="13"
+                          cap="round"
+                          [size]="200"
+                          label=""
+                          append="km/h"
+                          backgroundColor = "rgba(0, 0, 0, 0.2)"
+                          >
+                          </ngx-gauge>
+                      </div>
+
+
+
+            </div>
+
+            <div class="contaminatLevel contaminatLevel--mediumWidth">
+              <div class="" >
+                <h2 class ="contaminatLevel__title contaminatLevel__title--big" >Wind Direction</h2>
+                  <div class="wrapper flex-container" >
+
+                    <div class="number-hours">
+
+                        <span style="--index:1" > <p>NNE</p>  </span>
+                        <span style="--index:2" > <p>NE</p>  </span>
+                        <span style="--index:3" > <p>ENE</p>  </span>
+                        <span style="--index:4" > <p>E</p>  </span>
+                        <span style="--index:5" > <p>ESE</p>  </span>
+                        <span style="--index:6" > <p>SE</p>  </span>
+                        <span style="--index:7" > <p>SSE</p>  </span>
+                        <span style="--index:8" > <p>S</p>  </span>
+                        <span style="--index:9" > <p>SSO</p>  </span>
+                        <span style="--index:10" > <p>SO</p>  </span>
+                        <span style="--index:11" > <p>OSO</p>  </span>
+                        <span style="--index:12" > <p>O</p>  </span>
+                        <span style="--index:13" > <p>ONO</p>  </span>
+                        <span style="--index:14" > <p>NO</p>  </span>
+                        <span style="--index:15" > <p>NNO</p>  </span>
+                        <span style="--index:16" > <p>N</p>  </span>
+                    </div>
+                    <div class="arrows-body">
+                      <div class="arrow2"   [style.transform]="'rotate(' + anguloRotacion + 'deg)'" ></div>
+                    </div>
+
+                  </div>
+                  <!--
+                  <span>Templado</span>
+                  -->
+              </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div  class="containerGrid--50" >
+
+      <div class="windInfo">
+        <div class="flex-container contaminatLevel" >
+          <div class="contaminatLevel--mediumWidth">
+              <h4 class="contaminatLevel__title contaminatLevel__title--small" >Temperature</h4>
+              <div class="contaminatLevel__gauge">
+                        <ngx-gauge
+                          [value]="temperatureValue"
+                          type="arch"
+                          [thick]="8"
+                          cap="round"
+                          [max]=50
+                          [size]=73
+                          backgroundColor = "rgba(0, 0, 0, 0.2)"
+                          foregroundColor="#fe6385"
+                          >
+                      </ngx-gauge>
+                <span class="contaminatLevel__levelUnit" >C°</span>
+            </div>
+
+          </div>
+          <div class="contaminatLevel--mediumWidth"  >
+
+           <span style="font-size: 13px; display:block" > Pressure: {{pressureValue}} m</span>
+           <span style="font-size: 13px"  > Altitud: {{altitudeValue}} m</span>
+          </div>
+
+
+        </div>
+        <div class= "chart-Temperature" >
+          <canvas id="ctx"  ></canvas>
+        </div>
+
+      </div>
+
+      <div>
+        tds
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- este es el viejo, ponte chingon porque estamos en modo guerra -->
+
+
+
+
+
+
+
+
 <!-- <h1>Estación meteorologica CCAI</h1> -->
 <div  class="container">
 
@@ -9,12 +345,14 @@
         <div class="subContainerbmp180">
 
           <ngx-gauge
-          [value]="1030"
+          [value]="pressureValue"
            type="arch"
            [thick]="8"
            cap="round"
            [max]=3000
            [size]=100
+           backgroundColor = "rgba(0, 0, 0)"
+           foregroundColor="#7372BB"
 
 
           >
@@ -28,13 +366,14 @@
         <div class="subContainerbmp180">
 
               <ngx-gauge
-              [value]="2240"
+              [value]="altitudeValue"
               type="arch"
               [thick]="8"
               cap="round"
               [max]=3000
               [size]=100
-
+              backgroundColor = "rgba(0, 0, 0)"
+              foregroundColor="#2496BC"
 
               >
 
@@ -49,48 +388,51 @@
 
 
 
-    <div class="containerTemperature">
+    <div class="containerResults">
       <div class="subContainerTemperature">
         <h2>Temperature</h2>
           <ngx-gauge class = "containerGraph__gauge"
-              [value]="35"
+          [value]="temperatureValue"
               type="arch"
               [thick]="10"
               cap="round"
               [max]=80
               [size]=150
               append="C°"
+              backgroundColor = "rgba(0, 0, 0)"
+              foregroundColor="#E5941C"
               >
           </ngx-gauge>
           <span>Templado</span>
       </div>
 
+<!--
       <div  class="containerGraph__chart">
         <canvas id="ctx" width="1000" height="400" ></canvas>
       </div>
-
+-->
     </div>
 
   </div>
 
 <!-- Esta sección es para el pluviometro, anenometro y veleta -->
-<div>
+<div class="containerSensoresMQU">
   <div class="containerbmp180">
-    <h2>Air Quality/CO2</h2>
+    <h2>CO2</h2>
     <div class="subContainerbmp180">
 
       <ngx-gauge
-      [value]="1030"
+      [value]="co2value"
        type="arch"
        [thick]="8"
        cap="round"
        [max]=3000
        [size]=100
-
-
+       backgroundColor = "rgba(0, 0, 0)"
+       foregroundColor="#E5DF1C"
       >
     </ngx-gauge>
-    <span>pm </span>
+    <span>ppm </span>
     </div>
 
   </div>
@@ -100,78 +442,119 @@
     <div class="subContainerbmp180">
 
       <ngx-gauge
-      [value]="8"
+      [value]="ryValue"
        type="arch"
        [thick]="8"
        cap="round"
-       [max]=10
+       [max]=11
        [size]=100
-
+       backgroundColor = "rgba(0, 0, 0)"
+       foregroundColor="#E51CD6"
 
       >
     </ngx-gauge>
-    <span>Whats / m2 </span>
+    <span>UV Index</span>
+    </div>
+    <span>Baja</span>
+
+  </div>
+
+  <div class="containerbmp180">
+    <h2>O3</h2>
+    <div class="subContainerbmp180">
+
+      <ngx-gauge
+      [value]="o3value"
+       type="arch"
+       [thick]="8"
+       cap="round"
+       [max]=1
+       [size]=100
+       backgroundColor = "rgba(0, 0, 0)"
+      foregroundColor="#CB341F"
+      >
+    </ngx-gauge>
+    <span>ppm </span>
     </div>
 
   </div>
 </div>
 
+<!-- esta sección es para el pluviometro-->
+<!-- contenedor para el de pluviometro -->
+<div class="containerSensoresMQU">
+  <div class="subContainer__WindSpeed" >
+    <h2>Wind Speed</h2>
+    <div class="subContainerbmp180">
+        <ngx-gauge
+        [value]="windSpeed"
+        type="semi"
+        [thick]="13"
+        cap="round"
+        [size]="200"
+        label=""
+        append="km/h"
+        backgroundColor = "rgba(0, 0, 0)"
 
-  <div class="containerGraph">
-    <ngx-gauge
+        >
+        </ngx-gauge>
+    </div>
 
-      [value]="altitudeValue"
-      type="arch"
-      [thick]="gauegeThik"
-      cap="round"
-      [max]=300
-      [size]=220
-      label="Altitude"
-      append="C°"
-      >
-    </ngx-gauge>
+    </div>
+
+    <div>
+      <div class="subContainer__WindSpeed" >
+        <h2>Wind Direction</h2>
+          <div class="wrapper" >
+<div>
+
+  <div class="number-hours">
+
+    <span style="--index:1" > <p>NNE</p>  </span>
+    <span style="--index:2" > <p>NE</p>  </span>
+    <span style="--index:3" > <p>ENE</p>  </span>
+    <span style="--index:4" > <p>E</p>  </span>
+    <span style="--index:5" > <p>ESE</p>  </span>
+    <span style="--index:6" > <p>SE</p>  </span>
+    <span style="--index:7" > <p>SSE</p>  </span>
+    <span style="--index:8" > <p>S</p>  </span>
+    <span style="--index:9" > <p>SSO</p>  </span>
+    <span style="--index:10" > <p>SO</p>  </span>
+    <span style="--index:11" > <p>OSO</p>  </span>
+    <span style="--index:12" > <p>O</p>  </span>
+    <span style="--index:13" > <p>ONO</p>  </span>
+    <span style="--index:14" > <p>NO</p>  </span>
+    <span style="--index:15" > <p>NNO</p>  </span>
+    <span style="--index:16" > <p>N</p>  </span>
+</div>
+
+    <div class="arrows-body">
+      <div class="arrow2"   [style.transform]="'rotate(' + anguloRotacion + 'deg)'" ></div>
+    </div>
+</div>
+
+          <span >Templado</span>
+      </div>
+
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
   </div>
-
-
-
-  <div class="containerGraph">
-  <ngx-gauge
-    [value]="pressureValue"
-     type="arch"
-     [thick]="gauegeThik"
-     cap="round"
-     [max]=300
-     [size]=220
-     label="Pressure"
-     append="C°"
-    >
-  </ngx-gauge>
-
-  </div>
-
-  <div class="containerGraph">
-  <ngx-gauge
-            [size]=200
-             type="arch"
-             [thick]="gauegeThik"
-             [value]="airQualityValue"
-             cap="butt"
-             label="Air quality"
-             append="C"
-             [markers]="markerConfig"
-
-             >
-  </ngx-gauge>
-
-  </div>
-
-
-
-  </div>
-
-
-
-
-
 
