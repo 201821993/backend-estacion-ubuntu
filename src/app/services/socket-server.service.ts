@@ -22,7 +22,10 @@ export class SocketServerService {
   getRealData() {
     return this.socket.fromEvent('reciveRealData');
   }
+  accumulatedData(){
+    return this.socket.fromEvent('almacenamientoDatos');
+  }
 
-  
+
 
 }

@@ -9,6 +9,26 @@ import Chart from 'chart.js/auto'
   styleUrls: ['./view-data.component.css']
 })
 export class ViewDataComponent implements OnInit{
+
+
+    /*
+  arreglos que van a almacenar de la consulta a la base de datos diferentes valores coom la temperatura, los contaminantes
+
+  */
+  temperatura: any[] = []; // almacena la temperatura
+  pm1DB :number[] = []; // almacena el contaminante pm 1
+  pm_25 :number [] = []; // almacena el contaminante pm 2.5
+  pm_10 :number[] =[]; // almacena el contaminante pm10
+  horas:any[] = []; // almacena las horas
+
+
+
+
+
+
+
+
+
   anguloRotacion: any = 0.99;
   currentStyles:any;
 setCurrentStyles(){
@@ -55,16 +75,18 @@ setCurrentStyles(){
   gaugeAppendText = "km/hr";
 
 
+
+
   gauegeThik:any=14;
   size:any = 400;
   data :any = 15;
   arrayPrueba:any = [12, 19, 3, 5, 2, 3];
 
   dataChartTemperatura = {
-    labels: ['1:30', '2:00', '3:00', '4:00', '5:00', '6:00'],
+    labels: this.horas,
     datasets: [{
       label: 'Temperature',
-      data: [10, 19, 23, 24.5, 22, 17, 11],
+      data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]
       fill:"start",
       borderColor: 'rgb(75, 192, 192)',
     }]
@@ -109,7 +131,36 @@ this.o3value = message.ozono;
 }
 ngOnInit(): void {
 
+  this.socket.accumulatedData().subscribe((message:any) => {
+    console.log("estos son los datos hasta ahora acumulados mi compa  -> ",message );
+  });
 
+
+  this.data_fetch_service.obtenerweatherMeasuremnts().subscribe(respuesta=>{
+    this.weather_dataDB = respuesta;
+    console.log("la base de datos, respuetsa ",this.weather_dataDB);
+    // Recorre los elementos y añade cada propiedad con su respectivo arreglo
+    for (let i = 0; i < this.weather_dataDB.length ; i++) {
+
+        const elemento = this.weather_dataDB[i];
+        console.log("este es el chingado elemento ",elemento.pm2_5);
+        this.temperatura.push(elemento.temperature);
+        this.pm1DB.push(elemento.pm1_0);
+        this.pm_25.push(elemento.pm2_5);
+        this.pm_10.push(elemento.pm10);
+        this.horas.push(elemento.hora);
+
+    }
+    console.log("estos son los datos de la temperatura",this.temperatura);
+    console.log("pm1 ", this.pm1DB );
+    console.log(" pm 2_5 ",this.pm_25);
+    console.log(" pm 10 ",this.pm_10);
+    console.log(" pm 10 ",this.horas);
+
+
+
+
+   });
   this.data_fetch_service.obtenerRainDatos().subscribe(respuesta=>{
 
 
