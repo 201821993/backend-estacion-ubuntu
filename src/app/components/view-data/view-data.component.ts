@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit} from '@angular/core';
 //
 import { SocketServerService } from 'src/app/services/socket-server.service';
 import { DataFetchManagerService } from 'src/app/services/data-fetch-manager.service';
@@ -8,7 +8,7 @@ import Chart from 'chart.js/auto'
   templateUrl: './view-data.component.html',
   styleUrls: ['./view-data.component.css']
 })
-export class ViewDataComponent implements OnInit{
+export class ViewDataComponent implements OnInit, AfterViewInit{
 
 
     /*
@@ -19,7 +19,7 @@ export class ViewDataComponent implements OnInit{
   pm1DB :number[] = []; // almacena el contaminante pm 1
   pm_25 :number [] = []; // almacena el contaminante pm 2.5
   pm_10 :number[] =[]; // almacena el contaminante pm10
-  horas:any[] = []; // almacena las horas
+  horas:any[] =[]; // almacena las horas
 
 
 
@@ -42,17 +42,6 @@ setCurrentStyles(){
 
 
 
-  markerConfig = {
-    "0": { color: '#FFFFFF', size: 8, label: '0', type: 'line'},
-    "15": { color: '#FFFFFF', size: 4, type: 'line'},
-    "30": { color: '#FFFFFF', size: 8, label: '30', type: 'line'},
-    "40": { color: '#FFFFFF', size: 4, type: 'line'},
-    "50": { color: '#FFFFFF', size: 4, label: '50', },
-    "60": { color: '#FFFFFF', size: 4, type: 'line'},
-    "70": { color: '#FFFFFF', size: 8, label: '70', type: 'line'},
-    "85": { color: '#FFFFFF', size: 4, type: 'line'},
-    "100": { color: '#FFFFFF', size: 8, label: '100', type: 'line'},
-}
   respuesta :any;
   temperatureValue :any ;
   altitudeValue :any;
@@ -82,15 +71,6 @@ setCurrentStyles(){
   data :any = 15;
   arrayPrueba:any = [12, 19, 3, 5, 2, 3];
 
-  dataChartTemperatura = {
-    labels: this.horas,
-    datasets: [{
-      label: 'Temperature',
-      data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]
-      fill:"start",
-      borderColor: 'rgb(75, 192, 192)',
-    }]
-  };
 
 
 
@@ -129,6 +109,16 @@ this.o3value = message.ozono;
 
    });
 }
+dataChartTemperatura = {
+  labels: [this.horas],
+  datasets: [{
+    label: 'Temperature',
+    data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]
+    fill:"start",
+    borderColor: 'rgb(75, 192, 192)',
+  }]
+};
+
 ngOnInit(): void {
 
   this.socket.accumulatedData().subscribe((message:any) => {
@@ -158,29 +148,66 @@ ngOnInit(): void {
     console.log(" pm 10 ",this.horas);
 
 
+    const particulas2 = new Chart('particula', {
+      type: 'bar',
+      data: {
+        labels:this.horas, // ['01:00', '02:00', '04:00', '01:00', '02:00', '04:00','04:00']
+        datasets: [
+          {
+            label: 'pm 1.0',
+            data: this.pm1DB,
+
+            backgroundColor: '#3333ff',
+            borderWidth:1
+          },
+           {
+            label: 'pm 2.5',
+            data: this.pm_25,
+
+            backgroundColor: '#ce929d',
+            borderWidth:1
+          },
+          {
+            label: 'pm 100',
+            data: this.pm_10,
+
+               backgroundColor: '#4c195a',
+
+          }
+
+        ],
 
 
-   });
-  this.data_fetch_service.obtenerRainDatos().subscribe(respuesta=>{
+      },
 
+      options: {
+        responsive:true,
+        maintainAspectRatio :false,
 
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
 
+      }
 
-  });
-
-  this.data_fetch_service.obtenerweatherMeasuremnts().subscribe(respuesta=>{
-    console.log(respuesta);
-    this.weather_dataDB = respuesta;
-  });
-
-
+    });
 
 
   const ctx = document.getElementById('myChart');
   const myChart = new Chart("ctx", {
 
     type: 'line',
-    data: this.dataChartTemperatura,
+    data: {
+      labels: this.horas,
+      datasets: [{
+        label: 'Temperature',
+        data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]
+        fill:"start",
+        borderColor: 'rgb(75, 192, 192)',
+      }]
+    },
     options: {
       animations: {
         tension: {
@@ -218,51 +245,34 @@ ngOnInit(): void {
 
 
 
-  const particulas2 = new Chart('particula', {
-    type: 'bar',
-    data: {
-      labels: ['1:00', '2:00', '4:00', '1:00', '2:00', '4:00','4:00'],
-      datasets: [
-        {
-          label: 'pm 1.0',
-          data: [30,23,100,12,54,65,45],
-
-          backgroundColor: '#3333ff',
-          borderWidth:1
-        },
-         {
-          label: 'pm 2.5',
-          data: [30,23,43,43,54,32,45],
-
-          backgroundColor: '#ce929d',
-          borderWidth:1
-        },
-        {
-          label: 'pm 100',
-          data: [30,23,43,43,54,65,50],
-
-             backgroundColor: '#4c195a',
-
-        }
-
-      ],
+   });
 
 
-    },
 
-    options: {
-      responsive:true,
-      maintainAspectRatio :false,
 
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+  this.data_fetch_service.obtenerRainDatos().subscribe(respuesta=>{
 
-    }
+
+
 
   });
+
+  this.data_fetch_service.obtenerweatherMeasuremnts().subscribe(respuesta=>{
+    console.log(respuesta);
+    this.weather_dataDB = respuesta;
+  });
+
+
+
+
+}
+ngAfterViewInit():void {
+  // Código para el método AfterViewInit
+
+
+
+
+
 
 
 }
