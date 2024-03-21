@@ -200,7 +200,7 @@ ngOnInit(): void {
 
     type: 'line',
     data: {
-      labels: this.horas,
+      labels:  this.horas, // '1:00','2:00','3:00','4:00','5:00','7:00'
       datasets: [{
         label: 'Temperature',
         data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]

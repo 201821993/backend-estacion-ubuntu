@@ -202,11 +202,11 @@
                       <td class="hrtableWS"   *ngFor="let datas3 of weather_dataDB" > </td>
                       <td >{{ data.windDirection }}</td>
                     </tr>
-                    <tr  *ngFor="let data4 of weather_dataDB"  style=" width:100%;  display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
-                    gap: 10px; " >
-                      <td class="hrtableWS"   >  {{ data4.hora }}  </td>
-
+                    <tr style="width:100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(0, 1fr)); gap: 10px;">
+                      <ng-container *ngFor="let data4 of weather_dataDB">
+                        <td class="hrtableWS">{{ data4.hora }}</td>
+                      
+                      </ng-container>
                     </tr>
                     <tr   >
                       <td   >  Funciona o no funciona, nada más eso quiero saber, no más, no menos  </td>
@@ -316,7 +316,38 @@
       </div>
 
       <div>
-        tds
+          <div>
+
+          </div>
+          <div>
+              <table class="tabla-LLuvia">
+                <thead>
+                  <tr>
+                    <th>Lm2</th>
+                    <th>Tds</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  >
+                    <td > 5.5lm2</td>
+                    <td> 123 tds</td>
+                    <td> 03:00:00</td>
+                  </tr>
+                  <tr  >
+                    <td > 5.5lm2</td>
+                    <td> 123 tds</td>
+                    <td> 03:00:00</td>
+                  </tr>
+                  <tr  >
+                    <td > 5.5lm2</td>
+                    <td> 123 tds</td>
+                    <td> 03:00:00</td>
+                  </tr>
+                </tbody>
+              </table>
+
+          </div>
       </div>
 
     </div>

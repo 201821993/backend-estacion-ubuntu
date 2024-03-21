@@ -756,7 +756,29 @@ h3{
   border-left:6px solid  #1423DA ;
   animation:arrow-load 4s infinite;
 }
+/* Aquí esta el codigo para la lluvia  */
 
+.tabla-LLuvia{
+  background: rgb(29,27,30);
+  width: 100%;
+  text-align: center;
+border-collapse: collapse;
+}
+thead{
+  background-color: #7372BB;
+
+}
+th, td{
+
+  padding: 5px;
+  text-align: center;
+}
+tr:nth-child(even){
+  background-color: #7372BB;
+}
+tr:hover td {
+  background-color:  #0077b6;
+}
 
 /*
 
