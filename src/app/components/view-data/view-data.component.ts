@@ -112,7 +112,7 @@ this.o3value = message.ozono;
 dataChartTemperatura = {
   labels: [this.horas],
   datasets: [{
-    label: 'Temperature',
+    
     data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]
     fill:"start",
     borderColor: 'rgb(75, 192, 192)',
@@ -138,7 +138,7 @@ ngOnInit(): void {
         this.pm1DB.push(elemento.pm1_0);
         this.pm_25.push(elemento.pm2_5);
         this.pm_10.push(elemento.pm10);
-        this.horas.push(elemento.hora);
+        this.horas.push(elemento.hora.substring(0,2)); // se utiliza substring para extrar solo la hora de la fecha , 
 
     }
     console.log("estos son los datos de la temperatura",this.temperatura);

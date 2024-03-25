@@ -186,33 +186,30 @@
   <!-- este es el nuevo , conti0en weather data and temperatura and precipitaion   -->
   <div class="weather-container">
 
-    <div class="windInfo" >
+    <div class="windInfo" style="background-color:blueviolet;" >
         <div  class="tableWS"  >
           <table  >
-<thead></thead>
+
             <tbody class="tbodyWS">
-              <div style="width: 100%; display: flex; flex-wrap: wrap;">
-                <span *ngFor="let data2 of weather_dataDB" class="grid-item">
-                    <span class="hrtableWS">{{ data2.windSpeed }}km/hr</span>
-                </span>
-            </div>
-                    <tr  style=" width:100%;  display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
-                    gap: 10px; "   >
-                      <td class="hrtableWS"   *ngFor="let datas3 of weather_dataDB" > </td>
-                      <td >{{ data.windDirection }}</td>
+              <tr  >
+                <ng-container  *ngFor = "let data2 of weather_dataDB " >
+                  <td >{{data2.windSpeed }} Km/hr</td>
+                </ng-container>
+              </tr>
+              
+            
+                    <tr   >
+                      <ng-container  *ngFor="let datas3 of weather_dataDB" > 
+                      <td >{{ datas3.windDirection }}</td>
+                      </ng-container>
                     </tr>
-                    <tr style="width:100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(0, 1fr)); gap: 10px;">
+                    <tr >
                       <ng-container *ngFor="let data4 of weather_dataDB">
                         <td class="hrtableWS">{{ data4.hora }}</td>
                       
                       </ng-container>
                     </tr>
-                    <tr   >
-                      <td   >  Funciona o no funciona, nada más eso quiero saber, no más, no menos  </td>
-                      <td   >  miercoles de modo guerra  </td>
 
-                    </tr>
           </tbody>
       </table>
         </div>
@@ -278,10 +275,10 @@
         </div>
     </div>
 
+<!-- Aquí se encuentra la sección dedidacada a la temperatura   -->
+    <div  class="containerGrid--50" style="background-color: beige;"  >
 
-    <div  class="containerGrid--50" >
-
-      <div class="windInfo">
+      <div class="windInfo" >
         <div class="flex-container contaminatLevel" >
           <div class="contaminatLevel--mediumWidth">
               <h4 class="contaminatLevel__title contaminatLevel__title--small" >Temperature</h4>
@@ -314,12 +311,54 @@
         </div>
 
       </div>
+<!-- Dataos del la precipitación y lluvia en tiempo real -->
+    
+          <div class="windInfo" style="background-color: beige;" >
+            <div class="flex-container contaminatLevel" >
+              <div class="contaminatLevel--mediumWidth">
+                  <h4 class="contaminatLevel__title contaminatLevel__title--small" >TDS </h4>
+                  <div class="contaminatLevel__gauge">
+                            <ngx-gauge
+                              [value]="temperatureValue"
+                              type="arch"
+                              [thick]="8"
+                              cap="round"
+                              [max]=50
+                              [size]=73
+                              backgroundColor = "rgba(0, 0, 0, 0.2)"
+                              foregroundColor="#fe6385"
+                              >
+                          </ngx-gauge>
+                    <span class="contaminatLevel__levelUnit" >tds</span>
+                </div>
+    
+              </div>
+              <div class="contaminatLevel--mediumWidth"  >
+                
+                <h4 class="contaminatLevel__title contaminatLevel__title--small" >Precipitación</h4>
+                  <div class="contaminatLevel__gauge">
+                            <ngx-gauge
+                              [value]="temperatureValue"
+                              type="arch"
+                              [thick]="8"
+                              cap="round"
+                              [max]=50
+                              [size]=73
+                              backgroundColor = "rgba(0, 0, 0, 0.2)"
+                              foregroundColor="#fe6385"
+                              >
+                          </ngx-gauge>
+                    <span class="contaminatLevel__levelUnit" >lm2</span>
+                </div>
 
-      <div>
-          <div>
+              </div>
+    
+    
+            </div>
 
-          </div>
-          <div>
+          
+          <!-- Aquí se encuentra la tabla  dedidacada a tds y precipitación x mes -->
+          <div  class="marginTopGroubBox" >
               <table class="tabla-LLuvia">
                 <thead>
                   <tr>
