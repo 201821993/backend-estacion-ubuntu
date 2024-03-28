@@ -186,7 +186,7 @@
   <!-- este es el nuevo , conti0en weather data and temperatura and precipitaion   -->
   <div class="weather-container">
 
-    <div class="windInfo" style="background-color:blueviolet;" >
+    <div class="windInfo"  >
         <div  class="tableWS"  >
           <table  >
 
@@ -272,10 +272,62 @@
 
             </div>
 
-        </div>
+        </div> <!-- esta a la verga -->
     </div>
 
 <!-- Aquí se encuentra la sección dedidacada a la temperatura   -->
+<div class="windInfo" >
+  <div  class="tableWS"  >
+   
+
+  </div>
+
+  <div class="flex-container marginTopGroubBox" >
+      <div class="contaminatLevel contaminatLevel--mediumWidth"  >
+
+        <div class= "chart-Temperature" >
+          <canvas id="ctx"  ></canvas>
+        </div>
+
+      </div>
+
+      <div class="contaminatLevel contaminatLevel--mediumWidth">
+        <table class="tabla-LLuvia">
+      <thead>
+        <tr>
+          <th>Lm2</th>
+          <th>Tds</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  >
+          <td > 5.5lm2</td>
+          <td> 123 tds</td>
+          <td> 03:00:00</td>
+        </tr>
+        <tr  >
+          <td > 5.5lm2</td>
+          <td> 123 tds</td>
+          <td> 03:00:00</td>
+        </tr>
+        <tr  >
+          <td > 5.5lm2</td>
+          <td> 123 tds</td>
+          <td> 03:00:00</td>
+        </tr>
+      </tbody>
+    </table>
+
+      </div>
+
+  </div> <!-- esta a la verga -->
+</div>
+
+  </div>
+
+<!-- Almacen o deposito de la temperatura la  tabla de precipitación y tds etc 
+  
     <div  class="containerGrid--50" style="background-color: beige;"  >
 
       <div class="windInfo" >
@@ -311,82 +363,43 @@
         </div>
 
       </div>
-<!-- Dataos del la precipitación y lluvia en tiempo real -->
     
-          <div class="windInfo" style="background-color: beige;" >
-            <div class="flex-container contaminatLevel" >
-              <div class="contaminatLevel--mediumWidth">
-                  <h4 class="contaminatLevel__title contaminatLevel__title--small" >TDS </h4>
-                  <div class="contaminatLevel__gauge">
-                            <ngx-gauge
-                              [value]="temperatureValue"
-                              type="arch"
-                              [thick]="8"
-                              cap="round"
-                              [max]=50
-                              [size]=73
-                              backgroundColor = "rgba(0, 0, 0, 0.2)"
-                              foregroundColor="#fe6385"
-                              >
-                          </ngx-gauge>
-                    <span class="contaminatLevel__levelUnit" >tds</span>
-                </div>
-    
-              </div>
-              <div class="contaminatLevel--mediumWidth"  >
-                
-                <h4 class="contaminatLevel__title contaminatLevel__title--small" >Precipitación</h4>
-                  <div class="contaminatLevel__gauge">
-                            <ngx-gauge
-                              [value]="temperatureValue"
-                              type="arch"
-                              [thick]="8"
-                              cap="round"
-                              [max]=50
-                              [size]=73
-                              backgroundColor = "rgba(0, 0, 0, 0.2)"
-                              foregroundColor="#fe6385"
-                              >
-                          </ngx-gauge>
-                    <span class="contaminatLevel__levelUnit" >lm2</span>
-                </div>
+<div class="windInfo" style="background-color: beige;" >
+  <div class="flex-container contaminatLevel" >
+    <div class="contaminatLevel--mediumWidth">
+        <h4 class="contaminatLevel__title contaminatLevel__title--small" >TDS </h4>
+        <div class="contaminatLevel__gauge">
+                  <ngx-gauge
+                    [value]="temperatureValue"
+                    type="arch"
+                    [thick]="8"
+                    cap="round"
+                    [max]=50
+                    [size]=73
+                    backgroundColor = "rgba(0, 0, 0, 0.2)"
+                    foregroundColor="#fe6385"
+                    >
+                </ngx-gauge>
+          <span class="contaminatLevel__levelUnit" >tds</span>
+      </div>
 
-              </div>
-    
-    
-            </div>
-
-          
-          <!-- Aquí se encuentra la tabla  dedidacada a tds y precipitación x mes -->
-          <div  class="marginTopGroubBox" >
-              <table class="tabla-LLuvia">
-                <thead>
-                  <tr>
-                    <th>Lm2</th>
-                    <th>Tds</th>
-                    <th>Fecha</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr  >
-                    <td > 5.5lm2</td>
-                    <td> 123 tds</td>
-                    <td> 03:00:00</td>
-                  </tr>
-                  <tr  >
-                    <td > 5.5lm2</td>
-                    <td> 123 tds</td>
-                    <td> 03:00:00</td>
-                  </tr>
-                  <tr  >
-                    <td > 5.5lm2</td>
-                    <td> 123 tds</td>
-                    <td> 03:00:00</td>
-                  </tr>
-                </tbody>
-              </table>
-
-          </div>
+    </div>
+    <div class="contaminatLevel--mediumWidth"  >
+      
+      <h4 class="contaminatLevel__title contaminatLevel__title--small" >Precipitación</h4>
+        <div class="contaminatLevel__gauge">
+                  <ngx-gauge
+                    [value]="temperatureValue"
+                    type="arch"
+                    [thick]="8"
+                    cap="round"
+                    [max]=50
+                    [size]=73
+                    backgroundColor = "rgba(0, 0, 0, 0.2)"
+                    foregroundColor="#fe6385"
+                    >
+                </ngx-gauge>
+          <span class="contaminatLevel__levelUnit" >lm2</span>
       </div>
 
     </div>
@@ -395,7 +408,77 @@
   </div>
 
 
+<div  class="marginTopGroubBox" >
+    <table class="tabla-LLuvia">
+      <thead>
+        <tr>
+          <th>Lm2</th>
+          <th>Tds</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  >
+          <td > 5.5lm2</td>
+          <td> 123 tds</td>
+          <td> 03:00:00</td>
+        </tr>
+        <tr  >
+          <td > 5.5lm2</td>
+          <td> 123 tds</td>
+          <td> 03:00:00</td>
+        </tr>
+        <tr  >
+          <td > 5.5lm2</td>
+          <td> 123 tds</td>
+          <td> 03:00:00</td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>
+</div>
+
+</div>
+
+  
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!-- este es el viejo, ponte chingon porque estamos en modo guerra -->
+
+
+
+
+
+
+
 
 
 

@@ -205,7 +205,7 @@ ngOnInit(): void {
         label: 'Temperature',
         data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]
         fill:"start",
-        borderColor: 'rgb(75, 192, 192)',
+        borderColor: '#fe6385',
       }]
     },
     options: {
@@ -228,8 +228,13 @@ ngOnInit(): void {
           min: 0,
           max: 50,
           grid: {
-            display: false // Oculta la cuadrícula del eje y
+            display: true // Oculta la cuadrícula del eje y
           }
+        }
+      },
+      plugins:{
+        legend:{
+          display:false,
         }
       },
       backgroundColor:"#fe6385",
