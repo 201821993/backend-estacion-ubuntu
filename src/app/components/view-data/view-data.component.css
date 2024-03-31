@@ -800,3 +800,136 @@ tr:hover td {
 
 */
 
+
+.container2{
+  width: 100%;
+  height:50vh;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background: gold;
+}
+
+.sensors{
+  width: 98%;
+  height: 100%;
+  background: darkgrey;
+
+}
+
+.realtime{
+  width: 100%;
+  height: 30%;
+  background: red;
+
+
+}
+
+.gauge{
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2.5%;
+}
+
+.gauge-right{
+  width: 49%;
+  height: 100%;
+  background-color: beige;
+  
+}
+
+
+.gauge-left{
+  width: 49%;
+  height: 100%;
+  background-color: palevioletred;
+
+}
+
+@media screen and (max-width:750px){
+
+
+  .container{
+      grid-template-columns: none;
+      width: 90%;
+      height:50vh; /* aquí también se modifico parece que lo mejor es de 100vh , antes tenía el valor de 50vh*/
+      margin:0 auto;
+      display: flex;
+      flex-wrap: wrap;
+
+  }
+  
+.sensors{
+  width: 98%;
+  height: 100%; /* el original es de  100%  probablemente fucione la de fit content , la que parecia más viable es de 50% */
+  background: darkgrey;
+
+
+}
+
+  
+}
+
+@media screen and (max-width:375px) {
+
+.container2{
+      grid-template-columns: none;
+      width: 90%;
+      height:110vh; 
+      margin:0 auto;
+      display: flex;
+      
+   
+      
+  }
+          
+.sensors{
+  width: 98%;
+  height: 100vh; 
+  background: darkgrey;
+ 
+}
+
+.realtime{
+  width: 100%;
+  height: 15%;
+  background: red;
+
+
+}
+
+
+.gauge{
+  width: 100%;
+  height: 80vh;
+ 
+ 
+ 
+  
+  
+}
+
+
+.gauge-right{
+  width: 100%;
+  height: 40%;
+  background-color: beige;
+  margin-top: 0;
+  
+}
+
+
+.gauge-left{
+  width: 100%;
+  height:220.77px;
+  background-color: none;
+  
+
+
+}
+
+
+}

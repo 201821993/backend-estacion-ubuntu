@@ -59,13 +59,8 @@ setCurrentStyles(){
   gaugeValue = 28.3;
    // aquí se guarda la consulta realizada por la vista sp_view_weatherdata
    weather_dataDB :any;
-
   gaugeLabel = "Speed";
   gaugeAppendText = "km/hr";
-
-
-
-
   gauegeThik:any=14;
   size:any = 400;
   data :any = 15;
