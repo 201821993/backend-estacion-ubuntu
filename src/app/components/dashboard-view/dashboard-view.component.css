@@ -1,0 +1,514 @@
+
+html{
+  font-size: 16px;
+
+}
+/* este es el contenedor padre de todos, considerar que sea solo el de uno solo */
+.container-pattern{
+    width: 90%;
+    height: 100vh;
+    color :rgb(255, 255, 255) ; /* rgb(200, 200, 200) aliceblue  | este color es rgb(110, 110, 110); cuando se ve blanco la pantalla*/
+    margin:  0 auto;
+    
+   /* border: 1px dashed black; */
+   /*background-color: aqua;*/
+
+    
+  }
+  /*este el el contenedor padre de los contaminantes contiene dos grids, uno de 60 por ciento y uno de 40%*/
+  .contaminants-Continer{
+    width: 100%;
+    height: 48%;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    /*border: #ccc 1px solid ; */
+    /*overflow: hidden;  <<<<<<<<>>>>>>>>>> recuerda que lo comentaste   */ 
+    margin-bottom: 10px;
+  }
+/* este contendor causa que los elementos se ditribuyan a lo largo del contendor */
+  .flex-container{
+    width: 100%;
+    display:flex ;
+    justify-content: space-between ;
+    align-items: center;
+  
+  }
+  /*este contenedor es para la grafica y los medidores de la calidad del aire*/
+  .contacontaminants-airQuality{
+    display: grid;
+    grid-template-rows: 35% 65%;
+    padding-right: 15px;
+  }
+ 
+  .contaminatLevel--smallWidth{
+    width: 28%;
+  }
+  /*aquí estan los estilos de la grafica de contaminates */
+  .container-chart{
+    width: 100%;
+    height: 100%;
+    background: rgb(29,27,30,0.29);
+    padding: auto;
+  }
+  .chart-particula{
+   
+    width: 99%;
+    height: 99%;
+    
+    
+  }
+
+
+
+  /*Este contenedor es para la otra sección del grid que vale solo 40% ,donde van a estar el ozono , uv y dioxido*/
+  .contaminants-uvSensor{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50% 50% ;
+     /* background: pink; */ 
+    
+    
+  } 
+
+  /*Estos estilos son para contenedor del ozono y dioxido de carbono y los rayos uv*/
+
+  .contaminatLevel{
+    height: 95%;
+    background: rgb(29,27,30,0.29);
+   
+   
+  }
+  
+  .contaminatLevel--mediumWidth{
+    width: 48%;
+  }
+  .align-self-Start{
+    align-self: start;
+
+  }
+  .align-self-End{
+    align-self: end;
+
+  }
+  .contaminatLevel__title--big{
+    font-size: 18px;
+  }
+  .contaminatLevel__gauge{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  
+  }
+
+  /*vamos a hacer el texto responsivo */
+  
+  /* ************ Estilos  TABLA DE UV ******** */
+
+  .container-tableUV{
+    width: 48%;
+    height: 95%;
+    background: rgb(29,27,30,0.5);
+    border-radius: 10px;
+    overflow-y: scroll; /* Enable vertical scroll bar */
+    
+  
+  }
+  .tabla-uv{
+    width:100%;
+    height: 100%;
+   
+  }
+  .tabla-uv thead{
+    background-color: #4d4b78;
+  
+  }
+  .tabla-uv th,
+  .tabla-uv td {
+      padding: 2px;
+      text-align: center;
+  }
+
+  .tabla-uv  tr:nth-child(even){
+    background-color: #7372BB;
+  }
+  .tabla-uv  tr:hover td {
+    background-color:  #7372BB;
+  }
+
+  
+  @media screen and (max-width: 768px) {
+
+    .contaminants-Continer{
+      width: 100%;
+      height:fit-content;
+      display: flex;
+      flex-wrap: wrap;
+      
+     /* 
+      overflow: visible;
+      border: pink 3px solid;
+      */
+     overflow: hidden;
+     }
+
+     .contacontaminants-airQuality{
+      width: 100%;
+      height: 80%;
+      display: grid;
+      grid-template-rows: 30% 70%;
+      padding-right: 0px;
+      /*
+      border: green 3px solid ;
+      */
+    
+    }
+
+
+  }
+  
+
+
+  /* Aquí esta la otra sección de donde se pone lo que es el la
+   dirección 
+   velocidad del viento 
+  la temperatura 
+  tds y precipitación
+  */
+
+
+
+  .container{
+    width: 100%;
+    height:48%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+   /*  background: gold; */
+   margin-top: 10px;
+  
+}
+
+.sensors{
+    width: 98%;
+    height: 100%;
+  /*   background: darkgrey; */
+ 
+}
+
+.realtime{
+    width: 100%;
+    height: 30%;
+ /*    background: red; */
+
+ background: rgb(29,27,30,0.5);
+}
+
+.gauge{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   margin-top: 10px;
+    
+}
+
+.gauge-right{
+    width: 49%;
+    height: 100%;
+   /*  background-color: beige; */
+   background: rgb(29,27,30,0.5);
+}
+
+
+.gauge-left{
+    width: 49%;
+    height: 100%;
+    /* background-color: palevioletred; */
+    background: rgb(29,27,30,0.5);
+
+}
+
+/* TABLA DIRECCION Y FUERZA DEL VIENTO */
+
+
+.tableWS{
+
+  width: 100%;
+  /* background: rgb(29,27,30,0.5); */
+  border-radius: 10px;
+  overflow-x: scroll;
+  /* align-self: center;
+  justify-self: center; */
+  
+
+
+}
+.tablaViento{
+  width: 100%;
+  height: 100%;
+ 
+
+}
+.tablaViento th,
+.tablaViento td {
+ 
+    text-align: center;
+}
+::-webkit-scrollbar{
+  width: 9px;
+}
+::-webkit-scrollbar-thumb{
+
+  background: #1D1B1E;
+}
+
+
+
+
+/* ¨¨¨¨[ DIRECTION DEL VIENTO ] ¨¨¨ */
+/*       */
+.wrapper{
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #588aab;
+
+}
+.number-hours{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+}
+.number-hours span {
+
+  position: absolute;
+  transform: rotate(calc(var(--index)*22.5deg));
+  inset:6px;
+  text-align: center;
+}
+
+
+.number-hours span p{
+  font-size: 10px;
+
+  transform: rotate(calc(var(--index)*-22.5deg));
+
+}
+
+
+@media screen and (max-width:768px){
+
+
+    .container{
+        grid-template-columns: none;
+        width: 100%;
+        height:49%; /* aquí también se modifico parece que lo mejor es de 100vh , antes tenía el valor de 50vh*/
+        margin:0 auto;
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+    
+.sensors{
+    width: 100%;
+    height: 100%; /* el original es de  100%  probablemente fucione la de fit content , la que parecia más viable es de 50% */
+    /* background: darkgrey; */
+
+
+}
+
+    
+}
+
+@media screen and (max-width:375px) {
+
+.container{
+        grid-template-columns: none;
+        width: 100%;
+        height:110vh; 
+        margin:0 auto;
+        display: flex;
+        
+     
+        
+    }
+            
+.sensors{
+    width: 100%;
+    height: 100vh; 
+   /*  background: darkgrey; */
+   
+}
+
+.realtime{
+    width: 100%;
+    height: 15%;
+   /*  background: red; */
+
+
+}
+
+
+.gauge{
+    width: 100%;
+    height: 80vh;
+  
+   
+}
+
+
+.gauge-right{
+    width: 100%;
+    height: 40%;
+  /*   background-color: beige; */
+    margin-top: 0;
+    
+}
+
+
+.gauge-left{
+    width: 100%;
+    height:220.77px;
+    background-color: none;
+    
+  
+
+}
+
+
+}
+
+
+/* aquí estan los estilos para lo que es la temperatura, pluviometro y  el tds */
+/*este contendor padre de toda la sección*/
+.weather-info{
+    width: 98%;
+    height: 100%;
+    justify-self: end;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  /*   background: green; */
+  
+
+}
+/*este el contendor padre  tanto para del bmp280 y de la precipitación por separado ambos separados*/
+.weather-info__real-time{
+    width: 49%;
+    height: 100%;
+  /*   background: blue; */
+  
+
+}
+.weather-info__real-time-data{
+    width: 100%;
+    height: 30%;
+   /*  background: black; */
+   background: rgb(29,27,30,0.5);
+    
+}
+/*Este estilo se aplica sobre el contendor que almacena el medidor de temperatura en tiempo real
+la principal caracteriztica es que se le indica que la altura será del 100% */
+.contaminatLevel--height100{
+  height: 100%;
+
+
+}
+
+.weather-info__real-time-container-data{
+    
+    width: 100%;
+height: 70%;
+ /*    background: burlywood; */
+ background: rgb(29,27,30,0.5);
+    margin-top: 10px;
+
+   
+}
+
+/*
+  *********** TABLA DE TDS Y DE LLUVIA *********  
+  Aquí estan los estilos  para tabla de  lluvia y el tds*/
+  .tabla-LLuvia{
+    background: rgb(29,27,30); 
+     width: 100%;
+     text-align: center;
+  
+   }
+  .tabla-LLuvia thead{
+     background-color: #3c5a6f;
+   
+   }
+   .tabla-LLuvia th,
+ .tabla-LLuvia td {
+   padding: 5px;
+     text-align: center;
+ }
+  
+ .tabla-LLuvia  tr:nth-child(even){
+     background-color: #588aab;
+   }
+   .tabla-LLuvia  tr:hover td {
+     background-color:  #588aab;
+   }
+
+
+/*Aquí estan los estilos para la grafica de temperatura */
+.continerChartTemperature{
+  width: 100%;
+  height: 89%;
+}
+
+.chart-Temperature{
+  width: 100%;
+  height: 100%;
+}
+
+
+@media screen and (max-width:375px) {
+    .weather-info{
+        height: 100vh;
+    }
+    .weather-info__real-time{
+        width: 100%;
+        height: 220px;
+       /*  background: blue; */
+       background: rgb(29,27,30,0.5);
+    
+    }
+
+    .weather-info__real-time-data{
+        width: 100%;
+        height: 82.5px;
+       /*  background: black; */
+       background: rgb(29,27,30,0.5);
+        
+    }
+
+    
+.weather-info__real-time-container-data{
+    
+    width: 100%;
+height: 220px;
+   /*  background: burlywood; */
+    margin-top: 10px;
+    background: rgb(29,27,30,0.5);
+
+   
+}
+}
+
+
+
+
+
+ 
+
+ 
