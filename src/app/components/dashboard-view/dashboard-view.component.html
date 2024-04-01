@@ -5,13 +5,13 @@
         <!-- este contenedor almacena lo los pmp1 pm2.5 y pm 10 que habla de la calidad del aire -->
         <div class="contacontaminants-airQuality" >
             <!-- el contendor flex-container tiene los medidores del pm1, pm2.5 y pm10 -->
-            <div class="flex-container">
+            <div class="flex-container--airQuality">
                 <!-- esta sección es para el contaminante pm 1-->
                 <div class="contaminatLevel contaminatLevel--smallWidth">
                     <!-- titulo del medidor  -->
                     <div class="flex-container" >
                       <h4 class="contaminatLevel__title contaminatLevel__title--small">Pm1</h4>
-                      <span> Regular </span> 
+                      <span class="contaminatLevel__text" > Regular </span> 
                     </div>
                     
                     <div class="contaminatLevel__gauge">
@@ -38,7 +38,7 @@
                       <!-- titulo del medidor  -->
                       <div class="flex-container" >
                         <h4 class="contaminatLevel__title contaminatLevel__title--small">Pm 2.5</h4>
-                        <span> Regular </span> 
+                        <span class="contaminatLevel__text"  > Regular </span> 
                       </div>
 
                       <div class="contaminatLevel__gauge">
@@ -59,15 +59,15 @@
                     
                 </div>
 
-                <div class="contaminatLevel contaminatLevel--smallWidth">
+                <div class="contaminatLevel--marginTop contaminatLevel--smallWidth">
                     <!-- titulo del medidor y indice -->
                     <div class="flex-container" >
                       <h4 class="contaminatLevel__title contaminatLevel__title--small">Pm 10</h4>
-                      <span> Regular </span> 
+                      <span  class="contaminatLevel__text" > Regular </span> 
                     </div>
                     <div class="contaminatLevel__gauge">
                         <!-- aquí esta el medidor de pm 1 para visualizar los dato en tiempo real -->
-                            <ngx-gauge
+                            <ngx-gauge 
                             [value]="50"
                             type="arch"
                             [thick]="8"

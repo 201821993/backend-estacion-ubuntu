@@ -3,6 +3,8 @@ html{
   font-size: 16px;
 
 }
+
+
 /* este es el contenedor padre de todos, considerar que sea solo el de uno solo */
 .container-pattern{
     width: 90%;
@@ -33,10 +35,17 @@ html{
     align-items: center;
   
   }
+  .flex-container--airQuality{
+    width: 100%;
+    display:flex ;
+    justify-content: space-between ;
+    align-items: center;
+  
+  }
   /*este contenedor es para la grafica y los medidores de la calidad del aire*/
   .contacontaminants-airQuality{
     display: grid;
-    grid-template-rows: 35% 65%;
+    grid-template-rows: 30% 70%;
     padding-right: 15px;
   }
  
@@ -79,6 +88,13 @@ html{
    
    
   }
+ 
+  .contaminatLevel--marginTop{
+    height: 95%;
+    background: rgb(29,27,30,0.29);
+   
+   
+  }
   
   .contaminatLevel--mediumWidth{
     width: 48%;
@@ -99,11 +115,29 @@ html{
     display: flex;
     justify-content: center;
     align-items: center;
-   
-  
+ 
   }
+  
 
-  /*vamos a hacer el texto responsivo */
+
+/*
+                  ***** TITulos responsivos ********   
+                vamos a hacer el texto responsivo
+ */
+.contaminatLevel__title{
+
+  padding-top: 5px;
+  padding-left: 7px;
+
+}
+.contaminatLevel__title--small{
+  font-size: 15px;
+}
+.contaminatLevel__title--big{
+  font-size: 18px;
+}
+
+  
   
   /* ************ Estilos  TABLA DE UV ******** */
 
@@ -138,6 +172,11 @@ html{
     background-color:  #7372BB;
   }
 
+
+  @media screen and (max-width: 1300px) {
+
+   
+  }
   
   @media screen and (max-width: 768px) {
 
@@ -158,7 +197,7 @@ html{
       width: 100%;
       height: 80%;
       display: grid;
-      grid-template-rows: 30% 70%;
+      grid-template-rows: 35% 70% ;
       padding-right: 0px;
       /*
       border: green 3px solid ;
@@ -166,6 +205,56 @@ html{
     
     }
 
+    .contaminatLevel__title{
+
+      padding-top: 5px;
+      padding-left: 7px;
+    
+    }
+    .contaminatLevel__title--small{
+      font-size: 14px;
+    }
+    .contaminatLevel__title--big{
+      font-size: 16px;
+    }
+    .contaminatLevel__text{
+      font-size: 13px;
+
+
+
+    }
+  
+    .contaminants-uvSensor{
+      margin-bottom: 20px;
+      margin-top: 30px;
+    }
+
+   
+  }
+  
+  @media screen and (max-width: 375px) {
+
+    .flex-container--airQuality{
+      width: 100%;
+      height: fit-content;
+    display:flex ;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+    align-items: center;
+    }
+
+    .contaminatLevel--smallWidth{
+     width: 48%;
+    }
+    
+
+    .contaminatLevel--marginTop{
+     
+      margin-top: 5px;
+     
+     
+    }
 
   }
   
@@ -272,8 +361,8 @@ html{
 /*       */
 .wrapper{
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   background-color: #588aab;
 
@@ -474,34 +563,32 @@ height: 70%;
 
 @media screen and (max-width:375px) {
     .weather-info{
-        height: 100vh;
+        height: fit-content;
     }
     .weather-info__real-time{
         width: 100%;
-        height: 220px;
+        height: fit-content;
        /*  background: blue; */
-       background: rgb(29,27,30,0.5);
+       /* background: rgb(29,27,30,0.5); */
     
     }
 
     .weather-info__real-time-data{
         width: 100%;
-        height: 82.5px;
+        height:fit-content;
        /*  background: black; */
-       background: rgb(29,27,30,0.5);
-        
+/*        background: rgb(29,27,30,0.5);
+ */        
     }
 
     
 .weather-info__real-time-container-data{
-    
     width: 100%;
-height: 220px;
+    height: 220px;
    /*  background: burlywood; */
     margin-top: 10px;
     background: rgb(29,27,30,0.5);
 
-   
 }
 }
 
