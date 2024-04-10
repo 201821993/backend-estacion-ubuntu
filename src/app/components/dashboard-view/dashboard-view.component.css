@@ -228,7 +228,9 @@ html{
       margin-bottom: 20px;
       margin-top: 30px;
     }
-
+    .tableWS{
+      font-size: 14px;
+    }
    
   }
   
@@ -255,7 +257,9 @@ html{
      
      
     }
-
+    .tableWS{
+      font-size: 12px;
+    }
   }
   
 
@@ -326,8 +330,9 @@ html{
 .tableWS{
 
   width: 100%;
-  /* background: rgb(29,27,30,0.5); */
-  border-radius: 10px;
+  height: 100%; 
+   background: rgb(29,27,30,0.5); 
+  /*  border-radius: 10px;
   overflow-x: scroll;
   /* align-self: center;
   justify-self: center; */
@@ -341,11 +346,23 @@ html{
  
 
 }
+/* .tablaViento thead{
+  background-attachment: green;
+} */
 .tablaViento th,
 .tablaViento td {
  
     text-align: center;
 }
+
+.tablaViento  tr:nth-child(odd){
+  background-color: #588aab;
+}
+.tablaViento  tr:hover td {
+  background-color:  #588aab;
+}
+
+
 ::-webkit-scrollbar{
   width: 9px;
 }
@@ -408,6 +425,13 @@ html{
     width: 100%;
     height: 100%; /* el original es de  100%  probablemente fucione la de fit content , la que parecia más viable es de 50% */
     /* background: darkgrey; */
+  margin-bottom: 20px;
+
+}
+.weather-info{
+  width: 100%;
+  height: 100%;
+ 
 
 
 }
@@ -420,7 +444,7 @@ html{
 .container{
         grid-template-columns: none;
         width: 100%;
-        height:110vh; 
+        height:fit-content; 
         margin:0 auto;
         display: flex;
         
@@ -430,7 +454,7 @@ html{
             
 .sensors{
     width: 100%;
-    height: 100vh; 
+    height: 100%; 
    /*  background: darkgrey; */
    
 }
@@ -454,7 +478,7 @@ html{
 
 .gauge-right{
     width: 100%;
-    height: 40%;
+    height:220.77px;
   /*   background-color: beige; */
     margin-top: 0;
     
@@ -463,7 +487,7 @@ html{
 
 .gauge-left{
     width: 100%;
-    height:220.77px;
+    height:220.77px;/*height:220.77px;*/
     background-color: none;
     
   
@@ -484,6 +508,7 @@ html{
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    margin-top: 5px;
   /*   background: green; */
   
 
@@ -492,7 +517,7 @@ html{
 .weather-info__real-time{
     width: 49%;
     height: 100%;
-  /*   background: blue; */
+    
   
 
 }
@@ -502,6 +527,64 @@ html{
    /*  background: black; */
    background: rgb(29,27,30,0.5);
     
+}
+
+/*
+weather-info__real-time-data--rain esta clase, define los estilos para elcontendor padre, de lo que es el tds y la precipitación
+
+*/
+
+
+.contaminatLevel--rain{
+  height: 100%;
+  
+ 
+ 
+}
+.weather-info__real-time-data--rain{
+  width: 100%;
+  height: 80%;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+
+}
+
+.weather-info__data-info{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+.weather-info__update-time{
+  font-size: 11.5px;
+  width: 100%;
+  text-align: center;
+}
+
+.weather-info__label{
+  width: 48%;
+ 
+  
+}
+
+.weather-info__label--bold{
+ 
+  font-size: 15px;
+  font-weight: bold;
+}
+
+@media screen and (max-width:970px) {
+  .weather-info__label--bold{
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+
 }
 /*Este estilo se aplica sobre el contendor que almacena el medidor de temperatura en tiempo real
 la principal caracteriztica es que se le indica que la altura será del 100% */
@@ -576,6 +659,7 @@ height: 70%;
     .weather-info__real-time-data{
         width: 100%;
         height:fit-content;
+        margin-top: 10px;
        /*  background: black; */
 /*        background: rgb(29,27,30,0.5);
  */        

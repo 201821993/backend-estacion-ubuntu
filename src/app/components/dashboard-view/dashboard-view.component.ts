@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SocketServerService } from 'src/app/services/socket-server.service';
 import { DataFetchManagerService } from 'src/app/services/data-fetch-manager.service';
 import Chart from 'chart.js/auto'
-
+import { HostListener } from '@angular/core';
 @Component({
   selector: 'app-dashboard-view',
   templateUrl: './dashboard-view.component.html',
@@ -20,17 +20,9 @@ export class DashboardViewComponent {
   pm_10 :number[] =[]; // almacena el contaminante pm10
   horas:any[] =[]; // almacena las horas
 
-
-
-
-
-
-
-
-
   anguloRotacion: any = 0.99;
   currentStyles:any;
-setCurrentStyles(){
+  setCurrentStyles(){
   this.currentStyles={
 
     'transform': false ?'rotate(0.16turn)':  'rotate(0.69turn)'
@@ -40,7 +32,7 @@ setCurrentStyles(){
 }
 
 
-
+// variables almacenan lo que manda socket.io 
   respuesta :any;
   temperatureValue :any ;
   altitudeValue :any;
@@ -54,6 +46,11 @@ setCurrentStyles(){
   pm2_5:any;
   pm10:any;
   windSpeed:any;
+  /* Variables para la lluvia */
+  tds_tr:any  = 234 ;
+  precipitacion_tr:any =1.5;
+
+  
   gaugeType :any = "semi";
   gaugeValue = 28.3;
    // aquí se guarda la consulta realizada por la vista sp_view_weatherdata
@@ -65,18 +62,26 @@ setCurrentStyles(){
   data :any = 15;
   arrayPrueba:any = [12, 19, 3, 5, 2, 3];
 
+  @HostListener('window:resize',['$event'])
+    onResize(){
+      const screenWidth = window.innerWidth;
+      console.log("Este es el jodido ancho de la pantalla",screenWidth);
+      //alert("Este es el jodido ancho de la pantalla"+screenWidth);
+    }
 
+  
 
 
 constructor( private socket : SocketServerService , private data_fetch_service :  DataFetchManagerService ){
 
   this.setCurrentStyles();
-
+  // se le manad un mensaaje al servidor con el metodo this.socket.sendMessage
   this.socket.sendMessage("hola servidor , te mando de regreso un beso");
   this.socket.getMessage().subscribe((msg: any) => {
     console.log("este es el mensaje que manda el servidor",msg);
      // AQUÍ se reciben los datos mandados por el servidor
    });
+
    this.socket.getMessage().subscribe((message: any) => {
    console.log(message);
   });
@@ -268,12 +273,9 @@ ngOnInit(): void {
 ngAfterViewInit():void {
   // Código para el método AfterViewInit
 
-
-
-
-
-
-
 }
+
+
+
 
 }
