@@ -278,24 +278,22 @@ html{
     height:48%;
     display: grid;
     grid-template-columns: 50% 50%;
-   /*  background: gold; */
-   margin-top: 10px;
+    margin-top: 10px;
   
 }
 
 .sensors{
     width: 98%;
     height: 100%;
-  /*   background: darkgrey; */
  
 }
 
 .realtime{
     width: 100%;
     height: 30%;
- /*    background: red; */
 
- background: rgb(29,27,30,0.5);
+
+
 }
 
 .gauge{
@@ -311,7 +309,7 @@ html{
 .gauge-right{
     width: 49%;
     height: 100%;
-   /*  background-color: beige; */
+    background-color: beige; 
    background: rgb(29,27,30,0.5);
 }
 
@@ -319,7 +317,7 @@ html{
 .gauge-left{
     width: 49%;
     height: 100%;
-    /* background-color: palevioletred; */
+    background-color: palevioletred; 
     background: rgb(29,27,30,0.5);
 
 }
@@ -336,9 +334,7 @@ html{
   overflow-x: scroll;
   /* align-self: center;
   justify-self: center; */
-  
-
-
+ 
 }
 .tablaViento{
   width: 100%;
@@ -381,7 +377,6 @@ html{
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background-color: #588aab;
 
 }
 .number-hours{
@@ -411,45 +406,79 @@ html{
 @media screen and (max-width:768px){
 
 
-    .container{
-        grid-template-columns: none;
-        width: 100%;
-        height:49%; /* aquí también se modifico parece que lo mejor es de 100vh , antes tenía el valor de 50vh*/
-        margin:0 auto;
-        display: flex;
-        flex-wrap: wrap;
+  .container{
+      grid-template-columns: none;
+    grid-template-rows: 50% 50%;
+      width: 100%;
+      height:fit-content; /* aquí también se modifico parece que lo mejor es de 100vh , antes tenía el valor de 50vh*/
+   
 
-    }
-    
-.sensors{
+  }
+  
+  .sensors{
+      width: 100%;
+      height: fit-content; /* el original es de  100%  probablemente fucione la de fit content , la que parecia más viable es de 50% */
+      /* background: darkgrey; */
+      /* margin-bottom: 20px; */
+  }
+
+  .realtime{
     width: 100%;
-    height: 100%; /* el original es de  100%  probablemente fucione la de fit content , la que parecia más viable es de 50% */
-    /* background: darkgrey; */
-  margin-bottom: 20px;
-
+    height: 83.047px;
+   
+  }
+  .gauge{
+    height:100%;
+  } 
+  .gauge-left{
+    height: 100%;
 }
-.weather-info{
-  width: 100%;
+.gauge-right{
   height: 100%;
- 
-
-
 }
+  
+  .weather-info{
+    width: 100%;
+    height: fit-content;
+  justify-self:flex-start;
 
+
+
+  }
+
+  .weather-info__real-time{
+      width: 49%;
+      height:max-content ;
     
+
+  }
+
+  .weather-info__real-time{
+
+  height: max-content;
+  }
+
+  .weather-info__real-time-container-data{
+    width: 100%;
+    height: max-content;
+    margin-top: none;
+  }
+  
 }
 
 @media screen and (max-width:375px) {
 
-.container{
+  .container{
         grid-template-columns: none;
         width: 100%;
         height:fit-content; 
-        margin:0 auto;
+       
         display: flex;
         
-     
-        
+        display: flex;
+        flex-wrap: wrap; 
+
+
     }
             
 .sensors{
@@ -501,15 +530,15 @@ html{
 /* aquí estan los estilos para lo que es la temperatura, pluviometro y  el tds */
 /*este contendor padre de toda la sección*/
 .weather-info{
-    width: 98%;
+    width: 100%;
     height: 100%;
-    justify-self: end;
+    /* justify-self: start; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin-top: 5px;
-  /*   background: green; */
+  
+   /* background: green;  */
   
 
 }
@@ -579,10 +608,10 @@ weather-info__real-time-data--rain esta clase, define los estilos para elcontend
 }
 
 @media screen and (max-width:970px) {
-  .weather-info__label--bold{
+/*   .weather-info__label--bold{
     font-size: 14px;
     font-weight: bold;
-  }
+  } */
 
 
 }
@@ -646,6 +675,7 @@ height: 70%;
 
 @media screen and (max-width:375px) {
     .weather-info{
+      width: 100%;
         height: fit-content;
     }
     .weather-info__real-time{

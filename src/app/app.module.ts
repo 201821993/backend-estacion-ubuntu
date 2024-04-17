@@ -8,6 +8,7 @@ import {SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { ViewDataComponent } from './components/view-data/view-data.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardViewComponent } from './components/dashboard-view/dashboard-view.component';
+
 const config: SocketIoConfig = {
   url: 'http://localhost:3001',
   options: {} };
@@ -24,7 +25,9 @@ const config: SocketIoConfig = {
     NgxGaugeModule,
 
     SocketIoModule.forRoot(config),
-    HttpClientModule
+    HttpClientModule,
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]
