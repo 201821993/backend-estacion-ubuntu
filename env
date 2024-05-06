@@ -1,0 +1,5 @@
+HOST="localhost"
+DATABASE="EstacionMeteorologico"
+USER = "root"
+PASSWORD="mysqlMAO97"
+PORT=3306
