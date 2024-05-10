@@ -1,5 +1,6 @@
 import {getConnection} from "./../database/database";
 import {app} from "../app";
+import ecoData from "../globals/globalsData";
 // estas variables se ocupan para calcular el viento 
 let sensorMin = [63,80,89,120,175,232,273,385,438,569,613,667,746,812,869,931];
 let sensorMax = [69,88,98,133,194,257,301,426,484,612,661,737,811,868,930,993];
@@ -52,11 +53,11 @@ const getRainData = async(req,res) =>{
 const getDataWeatherStation = async(req,res) =>{
   
     try{
+
         const connection = await getConnection();
         const result = await connection.query("select * from sp_view_weatherdata");
-        
+        res.json(result);
      
-     console.log( res.json(result));
      
 
     }catch(error){
@@ -78,18 +79,29 @@ const insertDataWeatherStation = async(req,res)=>{
          pressure, 
          altitud, 
          ozono, 
-         air_quality, 
+         co2, 
          uv, 
          pm10_env, 
          pm25, 
          pm100_env, 
          windSpeed, 
          direction, 
-        co2
+        
         
         } = req.body;
         globalDirection = direction;
-        console.log("Directorio global",direction);
+        
+        ecoData.Temperature = temperature;
+        ecoData.Pressure = pressure;
+        ecoData.Altitude = altitud;
+        ecoData.Ozone = ozono;
+        ecoData.co2 = co2;
+        ecoData.Uv = uv;
+        ecoData.Pm1_0 = pm10_env;
+        ecoData.Pm2_5 = pm25;
+        ecoData.Pm10 = pm100_env;
+        ecoData.WindSpeed = windSpeed ;
+        ecoData.WindDirection = direction ;
     try{
         // aquí se calcula la dirección del viento 
         for(let i=0; i<=15; i++) {
@@ -101,12 +113,11 @@ const insertDataWeatherStation = async(req,res)=>{
            }
         
         const connection = await getConnection();
-        const result = await connection.query(`call sp_StoreMeteorologicalData('${temperature}','${pressure}','${altitud}','${pm10_env}','${pm25}','${pm100_env}','${ozono}','${air_quality}','${uv}','${windSpeed}','${angle}')`);
+        const result = await connection.query(`call sp_StoreMeteorologicalData('${temperature}','${pressure}','${altitud}','${pm10_env}','${pm25}','${pm100_env}','${ozono}','${co2}','${uv}','${windSpeed}','${angle}')`);
         res.status(200).json({status:"Well done!", message:" Data registered successfully "});
         const io = req.app.get('socketio');
         // aquí mandamos los datos al servidor 
         io.emit("reciveRealData", req.body);
-        console.log(req.body);
 
 
        

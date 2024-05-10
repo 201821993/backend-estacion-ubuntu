@@ -16,7 +16,19 @@ const io = require('socket.io')(http);
 
 // se importan las rutas
 import realtimeRoute from "./routes/meteorological.routes";
+const path = require('path');
 
+//
+/* app.use(Express.static(__dirname +"./dist/ccai-estacion-meteorologica" ));
+app.get("*",(req,res)=>{
+  res.sendFile(path.join(__dirname,"./dist/ccai-estacion-meteorologica","index.html"))
+}) */
+
+
+app.use(Express.static(path.join(__dirname, './dist/ccai-estacion-meteorologica' )));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname,  './dist/ccai-estacion-meteorologica' ));
+});
 
 app.use(bodyParser.urlencoded({ extended: false }));
 /* se utiliza para establecer el puerto en el que se ejecutará tu aplicación Express. */
@@ -51,8 +63,9 @@ io.on('connection', socket=>{
   // all socket events here
   console.log('id socket',socket.id);
  socket.on('sala',(data)=>{
-   console.log("Esta es la sala que manda el cliente ",data);
+   //console.log("Datos que tengo y que voy a enviar",globalDataWeather);
    io.emit('almacenamientoDatos',globalDataWeather);
+
  })
 });
 
