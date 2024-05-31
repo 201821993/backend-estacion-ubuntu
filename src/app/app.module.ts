@@ -5,18 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxGaugeModule } from 'ngx-gauge';
 import {SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-import { ViewDataComponent } from './components/view-data/view-data.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardViewComponent } from './components/dashboard-view/dashboard-view.component';
 
 const config: SocketIoConfig = {
-  url: 'http://localhost:3001',
+  url: 'http://estacion.ccaitese.com:3003/', //url: 'http://localhost:3001',
   options: {} };
 
 @NgModule({
   declarations: [
     AppComponent,
-    ViewDataComponent,
     DashboardViewComponent
   ],
   imports: [

@@ -6,16 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataFetchManagerService {
-  private apiUrl = 'http://localhost:3001/api/'; // Reemplaza con la URL de tu backend
+  private apiUrl = 'http://estacion.ccaitese.com:3003/api/'; // Reemplaza con la URL de tu backend
 
   constructor( private http:HttpClient ) { }
 
   obtenerRainDatos(){
-    return this.http.get("http://localhost:3001/api/getDataRain");
+    return this.http.get("http://estacion.ccaitese.com:3003/api/getDataRain");
   }
   obtenerweatherMeasuremnts(){
     return this.http.get(this.apiUrl+"getDataWeather");
   }
+  
+
 
 
 
