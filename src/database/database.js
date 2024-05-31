@@ -6,7 +6,7 @@ import config from "../config.js";
 
 const connection = mysql.createConnection({
     host:config.host,
-    user:'root',
+    user:'estacion',
     password:config.password,
     database: config.database,
     port :'3306'
