@@ -1,6 +1,12 @@
 // configuración de mysql y la base de datos 
+/*  import mysql from "promise-mysql";  
+la línea de arriba importa promise-mysql, el cual es utilizado en ubuntu, aparentemente no funciona para el servidor
 
-import mysql from "promise-mysql"; //import mysql from "mysql2/promise";
+import mysql from "mysql2/promise";
+la línea de arriba funciona con windows
+*/ 
+//se espera que esta línea funcione con el servidor
+import mysql from "mysql2";
 
 import config from "../config.js";
 
