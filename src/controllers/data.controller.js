@@ -1,6 +1,9 @@
 import {getConnection} from "./../database/database";
 import {app} from "../app";
 import ecoData from "../globals/globalsData";
+import fetch from "node-fetch";
+
+import { response } from "express";
 // estas variables se ocupan para calcular el viento 
 let sensorMin = [63,80,89,120,175,232,273,385,438,569,613,667,746,812,869,931];
 let sensorMax = [69,88,98,133,194,257,301,426,484,612,661,737,811,868,930,993];
@@ -69,6 +72,51 @@ const getDataWeatherStation = async(req,res) =>{
    
 }
 
+const EnvioDatos = async(req,res)=>{
+
+   const url = 'https://ccaitese.com/servicioEstacion.php/+"?prueba="1'; // Cambia esto por la URL de tu documento PHP
+        
+   const { 
+        
+    temperature,
+    pressure, 
+    altitud, 
+    ozono, 
+    co2, 
+    uv, 
+    pm10_env, 
+    pm25, 
+    pm100_env, 
+    windSpeed, 
+    direction, 
+   
+   
+   } = req.body;
+   
+     const data = {
+        nombre: 'Juan',
+        apellido: 'Pérez',
+        edad: 30
+    }; 
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({data})
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+            console.error('Error se ha capturado un error', error);
+        });
+     
+
+}
+
 
 // controlador para insertar la información  que manda el Arduigo Giga cada media hora en la base de datos y que también se manda al cliente
 const insertDataWeatherStation = async(req,res)=>{
@@ -89,19 +137,39 @@ const insertDataWeatherStation = async(req,res)=>{
         
         
         } = req.body;
+        console.log('req.body',req.body);
         globalDirection = direction;
         
-        ecoData.Temperature = temperature;
-        ecoData.Pressure = pressure;
-        ecoData.Altitude = altitud;
-        ecoData.Ozone = ozono;
+        ecoData.temperature = temperature;
+        ecoData.pressure = pressure;
+        ecoData.altitud = altitud;
+        ecoData.ozono = ozono;
         ecoData.co2 = co2;
-        ecoData.Uv = uv;
-        ecoData.Pm1_0 = pm10_env;
-        ecoData.Pm2_5 = pm25;
-        ecoData.Pm10 = pm100_env;
-        ecoData.WindSpeed = windSpeed ;
-        ecoData.WindDirection = direction ;
+        ecoData.uv = uv;
+        ecoData.pm10_env = pm10_env;
+        ecoData.pm25 = pm25;
+        ecoData.pm100_env = pm100_env;
+        ecoData.windSpeed = windSpeed ;
+        ecoData.direction = direction ;
+        const url = 'https://ccaitese.com/servicioEstacion.php/+"?addW="1'; // Cambia esto por la URL de tu documento PHP
+
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ecoData})
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+            console.error('Error se ha capturado un error', error);
+        });
+
+
     try{
         // aquí se calcula la dirección del viento 
         for(let i=0; i<=15; i++) {
@@ -173,6 +241,7 @@ export const methods = {
     showDataFromESP32,
     insertRanning,
     getDataWeatherStation,
-    getRainData
+    getRainData,
+    EnvioDatos
     
 };

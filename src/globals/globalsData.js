@@ -1,15 +1,15 @@
 const ecoData = {
-    Temperature:0,
-   Pressure :0,
-     Altitude:0,
-    Pm1_0:0,
-     Pm2_5:0,
-    Pm10:0,
-    Ozone:0,
-    co2:0,
-    Uv:0,
-    WindSpeed:0,
-    WindDirection:""
+    temperature:0,
+   pressure :0,
+     altitud:0,
+    ozono:0,
+     co2:0,
+    uv:0,
+    pm10_env:0,
+    pm25:0,
+    pm100_env:0,
+    windSpeed:0,
+    direction:""
 
 }
 module.exports= ecoData;

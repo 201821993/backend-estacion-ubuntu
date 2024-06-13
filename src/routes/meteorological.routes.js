@@ -11,6 +11,7 @@ router.get('/api/getDataRain',realTimeDataController.getRainData);
 router.post("/api/insert-data",realTimeDataController.insertDataWeatherStation);
 router.post('/api/showData',realTimeDataController.showDataFromESP32);
 router.post('/api/lluvia',realTimeDataController.insertRanning);
+router.post('/api/prueba',realTimeDataController.EnvioDatos);
 
 export default router;
 
