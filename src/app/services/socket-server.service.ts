@@ -1,5 +1,7 @@
 
-// servicio que
+/* 
+  servicio en el cual se implementan los metodos que nos permiten recivir los datos del backend
+*/ 
 import { Injectable } from '@angular/core';
 
 import {Socket} from 'ngx-socket-io';
@@ -10,7 +12,7 @@ export class SocketServerService {
 
   constructor(private socket:Socket) {
     this.socket.emit("sala",'uml');
-    console.log("y aquí entre?");
+    console.log("¿y aquí entre?");
    }
 
   sendMessage(msg: string) {

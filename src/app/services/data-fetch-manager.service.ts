@@ -6,13 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataFetchManagerService {
-  private apiUrl = 'http://estacion.ccaitese.com:3003/api/'; // Reemplaza con la URL de tu backend
+  private apiUrl = 'http://localhost:3000/api/'; // Reemplaza con la URL de tu backend
+// http://estacion.ccaitese.com:3000/api/  http://localhost:3000/api/';
 
   constructor( private http:HttpClient ) { }
 
   obtenerRainDatos(){
-    return this.http.get("http://estacion.ccaitese.com:3003/api/getDataRain");
-  }
+    return this.http.get("http://localhost:3000/api/getDataRain");// http://estacion.ccaitese.com:3000/api/getDataRain  |  http://localhost:3000/api/getDataRain
+  } 
   obtenerweatherMeasuremnts(){
     return this.http.get(this.apiUrl+"getDataWeather");
   }

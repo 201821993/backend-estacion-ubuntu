@@ -17,7 +17,7 @@
                     <div class="contaminatLevel__gauge">
                         <!-- aquí esta el medidor de pm 1 para visualizar los dato en tiempo real -->
                             <ngx-gauge
-                            [value]="50"
+                            [value]="pm1"
                             type="arch"
                             [thick]="8"
                             cap="round"
@@ -44,7 +44,7 @@
                       <div class="contaminatLevel__gauge">
                           <!-- aquí esta el medidor de pm 1 para visualizar los dato en tiempo real -->
                               <ngx-gauge
-                              [value]="50"
+                              [value]="pm2_5"
                               type="arch"
                               [thick]="8"
                               cap="round"
@@ -68,7 +68,7 @@
                     <div class="contaminatLevel__gauge">
                         <!-- aquí esta el medidor de pm 1 para visualizar los dato en tiempo real -->
                             <ngx-gauge 
-                            [value]="50"
+                            [value]="pm10"
                             type="arch"
                             [thick]="8"
                             cap="round"
@@ -108,11 +108,11 @@
                             <div class="contaminatLevel__gauge">
                         
                                   <ngx-gauge
-                                  [value]="0.095"
+                                  [value]="co2value"
                                   type="arch"
                                   [thick]="10"
                                   cap="round"
-                                  [max]=1
+                                  [max]=1100
                                   [size]=150
                                   backgroundColor = "rgba(0, 0, 0)"
                                   foregroundColor="#0077b6"
@@ -133,11 +133,11 @@
                         <div class="contaminatLevel__gauge " >
                     
                           <ngx-gauge  style="font-size: 30px;"
-                          [value]="0.095"
+                          [value]="o3value"
                            type="arch"
                            [thick]="9"
                            cap="round"
-                           [max]=1
+                           [max]=1000
                            [size]=120
                            backgroundColor = "rgba(0, 0, 0,0.5)"
                            foregroundColor="#0077b6"
@@ -166,7 +166,7 @@
                         <div class="contaminatLevel__gauge">
                     
                           <ngx-gauge
-                          [value]="5"
+                          [value]="ryValue"
                            type="arch"
                            [thick]="10"
                            cap="round"
@@ -263,7 +263,7 @@
                               [thick]="13"
                               cap="round"
                               [size]="240"
-                              label="Noroeste"
+                              label={{directionSocket}}
                               append="km/h"
                               backgroundColor = "rgba(0, 0, 0)"
                               >

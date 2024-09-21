@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardViewComponent } from './components/dashboard-view/dashboard-view.component';
 
 const config: SocketIoConfig = {
-  url: 'http://estacion.ccaitese.com:3003/', //url: 'http://localhost:3001',
+  url: 'http://localhost:3000', //url: 'http://localhost:3001',  http://estacion.ccaitese.com:3000/'
   options: {} };
 
 @NgModule({

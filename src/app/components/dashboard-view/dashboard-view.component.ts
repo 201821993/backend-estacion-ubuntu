@@ -11,25 +11,14 @@ import { HostListener } from '@angular/core';
 export class DashboardViewComponent {
 
     /*
-  arreglos que van a almacenar de la consulta a la base de datos diferentes valores coom la temperatura, los contaminantes
-
-  */
+      arreglos que van a almacenar de la consulta a la base de datos diferentes valores coom la temperatura, los contaminantes
+      */
   temperatura: any[] = []; // almacena la temperatura
   pm1DB :number[] = []; // almacena el contaminante pm 1
   pm_25 :number [] = []; // almacena el contaminante pm 2.5
   pm_10 :number[] =[]; // almacena el contaminante pm10
   horas:any[] =[]; // almacena las horas
 
-  anguloRotacion: any = 0.99;
-  currentStyles:any;
-  setCurrentStyles(){
-  this.currentStyles={
-
-    'transform': false ?'rotate(0.16turn)':  'rotate(0.69turn)'
-
-
-  };
-}
 
 
 // variables almacenan lo que manda socket.io 
@@ -46,6 +35,7 @@ export class DashboardViewComponent {
   pm2_5:any;
   pm10:any;
   windSpeed:any;
+  directionSocket:any;
   /* Variables para la lluvia */
   tds_tr:any  = 234 ;
   precipitacion_tr:any =1.5;
@@ -55,8 +45,7 @@ export class DashboardViewComponent {
   gaugeValue = 28.3;
    // aquí se guarda la consulta realizada por la vista sp_view_weatherdata
    weather_dataDB :any;
-  gaugeLabel = "Speed";
-  gaugeAppendText = "km/hr";
+  
   gauegeThik:any=14;
   size:any = 400;
   data :any = 15;
@@ -74,9 +63,9 @@ export class DashboardViewComponent {
 
 constructor( private socket : SocketServerService , private data_fetch_service :  DataFetchManagerService ){
 
-  this.setCurrentStyles();
+
   // se le manad un mensaaje al servidor con el metodo this.socket.sendMessage
-  this.socket.sendMessage("hola servidor , te mando de regreso un beso");
+  //this.socket.sendMessage("hola servidor , te mando de regreso un beso");
   this.socket.getMessage().subscribe((msg: any) => {
     console.log("este es el mensaje que manda el servidor",msg);
      // AQUÍ se reciben los datos mandados por el servidor
@@ -85,25 +74,27 @@ constructor( private socket : SocketServerService , private data_fetch_service :
    this.socket.getMessage().subscribe((message: any) => {
    console.log(message);
   });
-//aquí invocamos el servicio y utilizamos sus metodos para recibir los datos desde el back end
+//aquí invocamos el servicio y utilizamos sus metodos para recibir los datos desde el back end en tiempo real
   this.socket.getRealData().subscribe((message: any) => {
-    console.log(message);
+   /*  console.log(message);
     console.log(message.temperature);
     console.log(message.pressure);
     console.log(message.altitud);
     console.log(message.air_quality);
-    console.log(message.UVray);
-
-    this.temperatureValue = message.temperatura;
+    console.log(message.UVray); */
+      console.log("esto que es ",message);
+    this.temperatureValue = message.temperature;
     this.pressureValue = message.pressure;
     this.altitudeValue = message.altitud;
-    this.ryValue = message.UVRay;
     this.pm1 = message.pm10_env ;
-  this.pm2_5 = message.pm25;
-  this.pm10= message.pm100_env  ;
-  this.ryValue =  message.uv;
+    this.pm2_5 = message.pm25;
+    this.pm10= message.pm100_env  ;
+    this.ryValue =  message.uv;
     this.windSpeed = message.windSpeed;
-this.o3value = message.ozono;
+    this.o3value = message.ozono;
+    this.co2value = message.co2;
+    this.directionSocket = message.direction;
+    
 
 
    });
@@ -120,8 +111,21 @@ dataChartTemperatura = {
 
 ngOnInit(): void {
 
+  /* aquí estan los datos que han sido acumulados */
   this.socket.accumulatedData().subscribe((message:any) => {
-    console.log("estos son los datos hasta ahora acumulados mi compa  -> ",message );
+    this.temperatureValue = message.temperature;
+    console.log("<- temperatureValue--> ",this.temperatureValue);
+    this.pressureValue = message.pressure;
+    this.altitudeValue = message.altitud;
+    this.ryValue = message.uv;
+    this.pm1 = message.pm10_env ;
+    this.pm2_5 = message.pm25;
+    this.pm10= message.pm100_env;
+    this.windSpeed = message.windSpeed;
+    this.o3value = message.ozone;
+    this.co2value = message.co2;
+    this.directionSocket = message.direction;
+    
   });
 
 
