@@ -7,7 +7,7 @@ la línea de arriba funciona con windows
 */ 
 //se espera que esta línea funcione con el servidor
  // estea lińea es la que sugierio chat gpt para el back end con php import mysql from "mysql2";
-import mysql from "promise-mysql";  
+import mysql from "mysql";  
 
 import config from "../config.js";
 
@@ -20,7 +20,7 @@ module.exports = {
 
  const connection = mysql.createPool({
     host:config.host,
-    user:'root', /* estacion */
+    user:'root', 
     password:config.password,
     database: config.database,
     port :'3306',
