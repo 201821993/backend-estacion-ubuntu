@@ -24,6 +24,12 @@ export class SocketServerService {
   getRealData() {
     return this.socket.fromEvent('reciveRealData');
   }
+  getGrupoADataSocket(){
+    return this.socket.fromEvent('grupoA');
+  }
+  getGrupoBDataSocket(){
+    return this.socket.fromEvent('grupoB');
+  }
   accumulatedData(){
     return this.socket.fromEvent('almacenamientoDatos');
   }

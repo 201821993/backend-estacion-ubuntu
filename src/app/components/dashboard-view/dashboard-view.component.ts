@@ -18,6 +18,10 @@ export class DashboardViewComponent {
   pm_25 :number [] = []; // almacena el contaminante pm 2.5
   pm_10 :number[] =[]; // almacena el contaminante pm10
   horas:any[] =[]; // almacena las horas
+    horaGrupoB:any;
+        horaGrupoA:any;
+        
+
 
 
 
@@ -37,8 +41,10 @@ export class DashboardViewComponent {
   windSpeed:any;
   directionSocket:any;
   /* Variables para la lluvia */
-  tds_tr:any  = 234 ;
-  precipitacion_tr:any =1.5;
+  tds_tr:any  = 0 ;
+  precipitacion_tr:any =0;
+  humedad :any = 0;
+  registroLluvia:any =0;
 
   
   gaugeType :any = "semi";
@@ -51,29 +57,74 @@ export class DashboardViewComponent {
   data :any = 15;
   arrayPrueba:any = [12, 19, 3, 5, 2, 3];
 
+  /*
   @HostListener('window:resize',['$event'])
     onResize(){
       const screenWidth = window.innerWidth;
       console.log("Este es el jodido ancho de la pantalla",screenWidth);
       //alert("Este es el jodido ancho de la pantalla"+screenWidth);
     }
-
+*/
   
 
 
 constructor( private socket : SocketServerService , private data_fetch_service :  DataFetchManagerService ){
 
-
   // se le manad un mensaaje al servidor con el metodo this.socket.sendMessage
   //this.socket.sendMessage("hola servidor , te mando de regreso un beso");
   this.socket.getMessage().subscribe((msg: any) => {
-    console.log("este es el mensaje que manda el servidor",msg);
-     // AQUÍ se reciben los datos mandados por el servidor
-   });
+         // AQUÍ se reciben los datos mandados por el servidor
 
-   this.socket.getMessage().subscribe((message: any) => {
-   console.log(message);
-  });
+    console.log("este es el mensaje que manda el servidor",msg);
+   });
+this.socket.getGrupoADataSocket().subscribe((message:any)=>{
+    this.temperatureValue = message.temperature;
+    this.pressureValue = message.pressure;
+    this.altitudeValue = message.altitud;
+   // this.pm1 = message.pm10_env ;
+   // this.pm2_5 = message.pm25;
+   // this.pm10= message.pm100_env  ;
+    this.ryValue =  message.uv;
+    this.windSpeed = message.windSpeed;
+    this.o3value = message.ozono;
+    this.co2value = message.co2;
+    this.directionSocket = message.direction;
+    this.humedad = message.humedad;
+    this.tds_tr  = message.tds;
+    this.precipitacion_tr =message.lm2;
+    this.registroLluvia = message.ultimoRegistroHora; 
+    
+     const ahora  =  new Date();
+     this.horaGrupoA = ahora.toLocaleTimeString('es-MX',{
+        hour :'2-digit',
+        minute:'2-digit',
+     });
+
+});
+this.socket.getGrupoBDataSocket().subscribe((message:any)=>{
+
+      this.temperatureValue = message.temperature;
+    this.pressureValue = message.pressure;
+    this.altitudeValue = message.altitud;
+  
+    this.ryValue =  message.uv;
+    this.windSpeed = message.windSpeed;
+    this.o3value = message.ozono;
+    this.co2value = message.co2;
+    this.directionSocket = message.direction;
+    this.humedad = message.humedad;
+    this.tds_tr  = message.tds;
+    this.precipitacion_tr =message.lm2;
+    this.registroLluvia = message.ultimoRegistroHora; 
+    
+     const ahora  =  new Date();
+     this.horaGrupoB = ahora.toLocaleTimeString('es-MX',{
+        hour :'2-digit',
+        minute:'2-digit',
+     });
+
+});
+
 //aquí invocamos el servicio y utilizamos sus metodos para recibir los datos desde el back end en tiempo real
   this.socket.getRealData().subscribe((message: any) => {
    /*  console.log(message);
@@ -94,20 +145,22 @@ constructor( private socket : SocketServerService , private data_fetch_service :
     this.o3value = message.ozono;
     this.co2value = message.co2;
     this.directionSocket = message.direction;
+    this.humedad = message.humedad;
+    this.tds_tr  = message.tds;
+    this.precipitacion_tr =message.lm2;
+    this.registroLluvia = message.ultimoRegistroHora; 
     
+     const ahora  =  new Date();
+     this.horaGrupoB = ahora.toLocaleTimeString('es-MX',{
+        hour :'2-digit',
+        minute:'2-digit',
+     });
 
 
    });
+
 }
-dataChartTemperatura = {
-  labels: [this.horas],
-  datasets: [{
-    
-    data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]
-    fill:"start",
-    borderColor: 'rgb(75, 192, 192)',
-  }]
-};
+
 
 ngOnInit(): void {
 
@@ -122,11 +175,51 @@ ngOnInit(): void {
     this.pm2_5 = message.pm25;
     this.pm10= message.pm100_env;
     this.windSpeed = message.windSpeed;
-    this.o3value = message.ozone;
+    this.o3value = message.ozono;
     this.co2value = message.co2;
     this.directionSocket = message.direction;
+    this.humedad   = message.humedad;
+    this.tds_tr  = message.tds;
+    this.precipitacion_tr =message.lm2;
+    this.registroLluvia = message.ultimoRegistroHora; 
+
     
   });
+
+this.data_fetch_service.obtenerPromedioOzono().subscribe(respuesta=>{
+const data = respuesta;
+this.o3value = data[0].ozono;
+
+});
+this.data_fetch_service.obtenerPromedioParticulas().subscribe(respuesta=>{
+const data = respuesta;
+  this.pm1 = data[0].pm1_0 ?? 0;
+  this.pm2_5 = data[0].pm2_5 ?? 0;
+  this.pm10 = data[0].pm10 ?? 0;
+});
+
+//este metodo obtiene los datos de la lluvia y tds, en un plazo de 24 hrs
+this.data_fetch_service.obtenerRainDatos().subscribe(respuesta=>{
+  const data  = respuesta;
+  const precipitacion_tr = data[0].total_lluvia ?? 0;
+  const tds_tr = data[0].promedio_tds ?? 0;
+
+});
+
+
+}
+ngAfterViewInit():void {
+  // Código para el método AfterViewInit
+
+}
+
+
+
+
+}
+
+
+/*
 
 
   this.data_fetch_service.obtenerweatherMeasuremnts().subscribe(respuesta=>{
@@ -150,136 +243,6 @@ ngOnInit(): void {
     console.log(" pm 10 ",this.pm_10);
     console.log(" pm 10 ",this.horas);
 
-
-    const particulas2 = new Chart('particula', {
-      type: 'bar',
-      data: {
-        labels:this.horas, // ['01:00', '02:00', '04:00', '01:00', '02:00', '04:00','04:00']
-        datasets: [
-          {
-            label: 'pm 1.0',
-            data: this.pm1DB,
-
-            backgroundColor: '#3333ff',
-            borderWidth:1
-          },
-           {
-            label: 'pm 2.5',
-            data: this.pm_25,
-
-            backgroundColor: '#ce929d',
-            borderWidth:1
-          },
-          {
-            label: 'pm 100',
-            data: this.pm_10,
-
-               backgroundColor: '#4c195a',
-
-          }
-
-        ],
-
-
-      },
-
-      options: {
-        responsive:true,
-        maintainAspectRatio :false,
-
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-
-      }
-
-    });
-
-
-  const ctx = document.getElementById('myChart');
-  const myChart = new Chart("ctx", {
-
-    type: 'line',
-    data: {
-      labels:  this.horas, // '1:00','2:00','3:00','4:00','5:00','7:00'
-      datasets: [{
-        label: 'Temperature',
-        data: this.temperatura , // [10, 19, 23, 24.5, 22, 17, 11]
-        fill:"start",
-        borderColor: '#fe6385',
-      }]
-    },
-    options: {
-      animations: {
-        tension: {
-          duration: 2000,
-          easing: 'linear',
-          from: 1,
-          to: 0,
-          loop: true
-        }
-      },
-      scales: {
-        x: {
-          grid: {
-            display: false // Oculta la cuadrícula del eje x
-          }
-        },
-        y: { // defining min and max so hiding the dataset does not change scale range
-          min: 0,
-          max: 50,
-          grid: {
-            display: true // Oculta la cuadrícula del eje y
-          }
-        }
-      },
-      plugins:{
-        legend:{
-          display:false,
-        }
-      },
-      backgroundColor:"#fe6385",
-
-      responsive:true,
-      maintainAspectRatio :false,
-    },
-
-
-
-
-  });
-
-
-
    });
 
-
-
-
-  this.data_fetch_service.obtenerRainDatos().subscribe(respuesta=>{
-
-
-
-
-  });
-
-  this.data_fetch_service.obtenerweatherMeasuremnts().subscribe(respuesta=>{
-    console.log(respuesta);
-    this.weather_dataDB = respuesta;
-  });
-
-
-
-
-}
-ngAfterViewInit():void {
-  // Código para el método AfterViewInit
-
-}
-
-
-
-
-}
+*/

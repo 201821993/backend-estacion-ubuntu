@@ -1,449 +1,313 @@
-<!-- contenedor padre de toda la aplicación -->
-<div  class="container-pattern" >
-    <!-- contenedor para los contaminante y rayos uv y ozonozo y diosxido de carbono -->
-    <div class="contaminants-Continer" >
-        <!-- este contenedor almacena lo los pmp1 pm2.5 y pm 10 que habla de la calidad del aire -->
-        <div class="contacontaminants-airQuality" >
-            <!-- el contendor flex-container tiene los medidores del pm1, pm2.5 y pm10 -->
-            <div class="flex-container--airQuality">
-                <!-- esta sección es para el contaminante pm 1-->
-                <div class="contaminatLevel contaminatLevel--smallWidth">
-                    <!-- titulo del medidor  -->
-                    <div class="flex-container" >
-                      <h4 class="contaminatLevel__title contaminatLevel__title--small">Pm1</h4>
-                      <span class="contaminatLevel__text" > Regular </span> 
-                    </div>
-                    
-                    <div class="contaminatLevel__gauge">
-                        <!-- aquí esta el medidor de pm 1 para visualizar los dato en tiempo real -->
-                            <ngx-gauge
-                            [value]="pm1"
-                            type="arch"
-                            [thick]="8"
-                            cap="round"
-                            [max]=300
-                            [size]=73
-                            backgroundColor = "rgba(0, 0, 0, 0.5)"
-                            foregroundColor="#3333ff"
-                            >
-                            </ngx-gauge>
-                            <span class="contaminatLevel__levelUnit" >ug/m3 </span>
-                     </div>
-                     <!-- Esta etiqueta me permite determinar que tan peligrosa es el contaminate -->
-                     
-                </div>
+<div class="container-pattern">
+   <p>
+  Los datos mostrados provienen de sensores de bajo costo operados de forma independiente.
+    Pueden presentar interrupciones y no sustituyen información oficial
+  </p>  
+ <h3  >Datos ambientales</h3>
 
-                    <!-- este contendor es el de pm 2.5 -->
-                <div class="contaminatLevel contaminatLevel--smallWidth">
-                      <!-- titulo del medidor  -->
-                      <div class="flex-container" >
-                        <h4 class="contaminatLevel__title contaminatLevel__title--small">Pm 2.5</h4>
-                        <span class="contaminatLevel__text"  > Regular </span> 
-                      </div>
+  
+    <div class="containergrid">
+      <div class="gauge__container">      
+        <div class="flex-container" >
+            <h2 class="contaminatLevel__title contaminatLevel__title--big" >Humedad</h2>
+            <span> Regular </span>  
+        </div>
+          <div class="flex-container contaminatLevel__gauge"  >
+                  <ngx-gauge
+                    [value]="humedad" 
+                    type="full"
+                    [thick]="11"
+                    cap="round"
+                    [max]=100
+                    [size]=186
+               
+                    foregroundColor="#0077b6"
+                    label="%"
+                    >
+                    </ngx-gauge>
+          </div>
+          <p>Últ. act.: {{horaGrupoB}}</p>
+        </div>
 
-                      <div class="contaminatLevel__gauge">
-                          <!-- aquí esta el medidor de pm 1 para visualizar los dato en tiempo real -->
-                              <ngx-gauge
-                              [value]="pm2_5"
-                              type="arch"
-                              [thick]="8"
+        <div class="gauge__container">      
+          <div class="flex-container" >
+              <h2 class="contaminatLevel__title contaminatLevel__title--big" >Temperatura</h2>
+              <span> Regular </span>  
+          </div>
+            <div class="flex-container contaminatLevel__gauge"  >
+                  <ngx-gauge
+                                              [value]="temperatureValue"
+                                              type="arch"
+                                              [thick]="11"
+                                              cap="round"
+                                              [max]=50
+                                              [size]=200
+                                              label="C°"
+                                              foregroundColor="#fe6385"
+                                              >
+                                            </ngx-gauge>
+            </div>
+            <p>Últ. act.: {{horaGrupoA}}</p>
+
+          </div>
+          <div class="gauge__container">      
+            <div class="flex-container" >
+                <h2 class="contaminatLevel__title contaminatLevel__title--big" >PB</h2>
+                <span> Regular </span>  
+            </div>
+              <div class="flex-container contaminatLevel__gauge"  >
+<ngx-gauge
+  [value]="temperatureValue"
+  type="arch"
+  [thick]="11"
+   cap="round"
+  [max]="50"
+  [size]="200"
+  foregroundColor="#fe6385">
+</ngx-gauge>
+
+              </div>
+       <p>Últ. act.: {{horaGrupoA}}</p>
+
+            </div>
+            <div class="gauge__container">      
+            <div class="flex-container" >
+                <h2 class="contaminatLevel__title contaminatLevel__title--big" >Altitud</h2>
+                <span> Regular </span>  
+            </div>
+              <div class="flex-container contaminatLevel__gauge"  >
+                   <ngx-gauge
+                                              [value]="altitudeValue"
+                                              type="arch"
+                                              [thick]="11"
+                                              cap="round"
+                                              [max]=50
+                                              [size]=200
+                                        
+                                              foregroundColor="#fe6385"
+                                              >
+                                            </ngx-gauge>
+              </div>
+                          <p>Últ. act.: {{horaGrupoA}}</p>
+
+            </div>
+        
+        
+    </div>
+
+     <div class="containergrid">
+          <div class="gauge__container">      
+        <div class="flex-container" >
+            <h2 class="contaminatLevel__title contaminatLevel__title--big" >Vientos</h2>
+            <span> Regular </span>  
+        </div>
+          <div class="flex-container contaminatLevel__gauge"  >
+                <ngx-gauge
+                              [value]="windSpeed"
+                              type="semi"
+                              [thick]="13"
                               cap="round"
-                              [max]=300
-                              [size]=73
-                              backgroundColor = "rgba(0, 0, 0, 0.5)"
-                              foregroundColor="#ce929d"
+                              [size]="220"
+                              label={{directionSocket}}
+                              append="km/h"
+                             
                               >
                               </ngx-gauge>
-                              <span class="contaminatLevel__levelUnit" >ug/m3 </span>
-                      </div>
-                    
-                </div>
+          </div>
+          <p>Últ. act.: {{horaGrupoB}}</p>
 
-                <div class="contaminatLevel--marginTop contaminatLevel--smallWidth">
-                    <!-- titulo del medidor y indice -->
-                    <div class="flex-container" >
-                      <h4 class="contaminatLevel__title contaminatLevel__title--small">Pm 10</h4>
-                      <span  class="contaminatLevel__text" > Regular </span> 
-                    </div>
-                    <div class="contaminatLevel__gauge">
-                        <!-- aquí esta el medidor de pm 1 para visualizar los dato en tiempo real -->
-                            <ngx-gauge 
-                            [value]="pm10"
-                            type="arch"
-                            [thick]="8"
-                            cap="round"
-                            [max]=300
-                            [size]=73
-                            backgroundColor = "rgba(0, 0, 0, 0.5)"
-                            foregroundColor="#4c195a"
-                            >
-                            </ngx-gauge>
-                            <span class="contaminatLevel__levelUnit" >ug/m3 </span>
-                     </div>
-                     <!-- Esta etiqueta me permite determinar que tan peligrosa es el contaminate -->
-                    <!--  <span> Regular </span> -->
-                </div>
-
-            </div>
-            <!-- esta es la grafica de las particulas suspendidas -->
-            <div class="container-chart"  >
-                    <div class="chart-particula" >
-                        <canvas id="particula"  ></canvas>
-                    </div>  
-            </div>
-            
         </div>
-            
-        <!-- este conetenedor es para el de rayos uv, dioxido de carbono y ozono -->
-        <div class="contaminants-uvSensor">
-                <!-- Aquí se contiene lo que es o2 y o3, ozono y dioxido de carbono -->
-                <div class="flex-container" >
-                    
-                    <!-- contenedor de o2 -->
-                      <div class="contaminatLevel contaminatLevel--mediumWidth align-self-Start">
-                          <div class="flex-container" >
-                                <h2 class="contaminatLevel__title contaminatLevel__title--big" >O2</h2>
-                                <span> Regular </span> 
-                          </div>
-                            <div class="contaminatLevel__gauge">
-                        
-                                  <ngx-gauge
-                                  [value]="co2value"
-                                  type="arch"
-                                  [thick]="10"
-                                  cap="round"
-                                  [max]=1100
-                                  [size]=150
-                                  backgroundColor = "rgba(0, 0, 0)"
-                                  foregroundColor="#0077b6"
-                                  label="ppm"
-                                  >
-                                </ngx-gauge>
-                            
-                            </div>
-                        </div>
-                
-                      <div class="contaminatLevel contaminatLevel--mediumWidth align-self-Start">
-                        
-                        <!-- titulo y indice del OZONO -->
-                        <div class="flex-container" >
-                          <h2 class="contaminatLevel__title contaminatLevel__title--big" >Ozono</h2>
-                          <span> Regular </span> 
-                        </div>
-                        <div class="contaminatLevel__gauge " >
-                    
-                          <ngx-gauge  style="font-size: 30px;"
-                          [value]="o3value"
-                           type="arch"
-                           [thick]="9"
-                           cap="round"
-                           [max]=1000
-                           [size]=120
-                           backgroundColor = "rgba(0, 0, 0,0.5)"
-                           foregroundColor="#0077b6"
-                          [duration]="1500"
-                           label="ug/m3"
-                
-                          >
-                        </ngx-gauge>
-                        </div>
-                      <!--   <span>Regular </span> -->
-                    
-                      </div>
-
-                </div>
-                <!-- Esta sección es para los rayos uv  -->
-
-                <div   class="fullContainer-uv flex-container marginTopGroubBox "> 
-                    <!-- gauge -->
-                   
-                    
-                      <div class="contaminatLevel contaminatLevel--mediumWidth align-self-End">
-                        <div class="flex-container" >
-                            <h2 class="contaminatLevel__title contaminatLevel__title--big"  >Rayos uv</h2>
-                            <span>  Alto </span>
-                        </div>
-                        <div class="contaminatLevel__gauge">
-                    
-                          <ngx-gauge
+          <div class="gauge__container">      
+        <div class="flex-container" >
+            <h2 class="contaminatLevel__title contaminatLevel__title--big" >Rayos UV</h2>
+            <span> Regular </span>  
+        </div>
+          <div class="flex-container contaminatLevel__gauge"  >
+                 <ngx-gauge
                           [value]="ryValue"
                            type="arch"
-                           [thick]="10"
+                           [thick]="11"
                            cap="round"
                            [max]=11
-                           [size]="120"
-                           backgroundColor = "rgba(0, 0, 0,0.5)"
+                           [size]="200"
+                          
                            foregroundColor="#4d4b78"
                            [duration]="1500"
                            
                           >
                         </ngx-gauge>
-                        </div>
-                    
-                      </div>
-              
-                    
-                    <!-- uv intenstity table  -->
-                    
-                    <div class="container-tableUV align-self-End" >
-
-                      <table  class="tabla-uv" >
-                        <thead>
-            
-                          <tr >
-                            <th> Tpo </th>
-                            <th> UV</th>
-                          </tr>
-            
-            
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let dato of weather_dataDB; let iControl =index ">
-            
-                          <td> {{ dato.hora}} </td>
-                          <td> {{ dato.uv}} </td>
-                        </tr>
-            
-                        </tbody>
-                      </table>
-                      </div>
-                    
-                  </div> <!-- you belong to me -->
-        
-
-
-        </div >
-    </div> <!-- Aquí termna el de contaminants container -->
-
-    <!--  ****** [ CONTENEDOR general DEL VIENTO , TEMPERATURA Y TDS ] ********** -->
-    
-    <div class="container">
-      <div class="sensors" >
-          <div class="realtime">
-             
-              <!-- Aquí esta la tabla de la dirección del viento  -->
-              <div  class="tableWS"  >
-                    <table  class="tablaViento" >
-          
-                        <tbody class="tbodyWS">
-                          <tr >
-                              <ng-container  *ngFor = "let data2 of weather_dataDB " >
-                                <td >{{data2.windSpeed }} Kph</td>
-                              </ng-container>
-                          </tr>
-
-                                <tr >
-                                      <ng-container  *ngFor="let datas3 of weather_dataDB" > 
-                                      <td >{{ datas3.windDirection }}</td>
-                                      </ng-container>
-                                </tr>
-                                <tr >
-                                    <ng-container *ngFor="let data4 of weather_dataDB">
-                                      <td class="hrtableWS">{{ data4.hora }}</td>
-                                    
-                                    </ng-container>
-                                </tr>
-            
-                        </tbody>
-                    </table>
-              </div>
-
-
           </div>
-          <div class="gauge" >
-              <div class="gauge-right" >
-                 <!-- medidor de la velocidad del viento, donde tambien esta la dirección del viento -->
-                  <div class="gauge__air"  >
+              <p>Últ. act.: {{horaGrupoA}}</p>
 
-                      <h2 class ="contaminatLevel__title contaminatLevel__title--big" >Wind Speed</h2>
-                          <div class="flex-container contaminatLevel__gauge">
-                              <ngx-gauge
-                              [value]="windSpeed"
-                              type="semi"
-                              [thick]="13"
+        </div>
+
+     </div>
+     
+ <h3 >Contaminantes</h3>
+
+    
+   
+
+      <div class="containergrid">
+      <div class="gauge__container">      
+        <div class="flex-container" >
+            <h2 class="contaminatLevel__title contaminatLevel__title--big" >PM10</h2>
+            <span> Regular </span>  
+        </div>
+          <div class="flex-container contaminatLevel__gauge"  >
+                   <ngx-gauge
+                            [value]="pm1"
+                            type="arch"
+                            [thick]="11"
+                            cap="round"
+                            [max]=300
+                            [size]=200
+                         
+                            foregroundColor="#3333ff"
+                            >
+                            </ngx-gauge>
+          </div>
+          <p>PM-12h </p>
+        </div>
+        <div class="gauge__container">      
+          <div class="flex-container" >
+              <h2 class="contaminatLevel__title contaminatLevel__title--big" >PM2.5</h2>
+              <span> Regular </span>  
+          </div>
+            <div class="flex-container contaminatLevel__gauge"  >
+                 <ngx-gauge
+                              [value]="pm2_5"
+                              type="arch"
+                              [thick]="11"
                               cap="round"
-                              [size]="240"
-                              label={{directionSocket}}
-                              append="km/h"
-                              backgroundColor = "rgba(0, 0, 0)"
+                              [max]=300
+                              [size]=200
+                             
+                              foregroundColor="#ce929d"
                               >
                               </ngx-gauge>
-                          </div>
-  
-                  </div>
+            </div>
+             <p>PM-12h </p>
 
-              </div>
-              <div class="gauge-left" >
-                
-                <div class="gauge__air">
-                        
-                  <div class="contaminatLevel contaminatLevel--mediumWidth align-self-Start">
-                    <div class="flex-container" >
-                          <h2 class="contaminatLevel__title contaminatLevel__title--big" >Huemad</h2>
+          </div>
+          <div class="gauge__container">      
+            <div class="flex-container" >
+                <h2 class="contaminatLevel__title contaminatLevel__title--big" >PM1.0</h2>
+                <span> Regular </span>  
+            </div>
+              <div class="flex-container contaminatLevel__gauge"  >
+                 <ngx-gauge 
+                            [value]="pm10"
+                            type="arch"
+                            [thick]="11"
+                            cap="round"
+                            [max]=300
+                            [size]=200
                           
-                    </div>
-                      <div class="contaminatLevel__gauge">
-                  
-                            <ngx-gauge
-                            [value]="16"
-                            type="full"
-                            [thick]="10"
-                            cap="butt"
-                            [max]=100
-                            [size]=150
-                            backgroundColor = "rgba(0, 0, 0)"
-                            foregroundColor="#0077b6"
-                            label="%"
+                            foregroundColor="#4c195a"
                             >
-                          </ngx-gauge>
-                      
-                      </div>
-                  </div>
-                    <!-- 
-                    <span>Templado</span>
-                    -->
-               
-              
+                            </ngx-gauge>
               </div>
-            
-       
+                <p>PM-12h </p>
+            </div>
+            <div class="gauge__container">      
+            <div class="flex-container" >
+                <h2 class="contaminatLevel__title contaminatLevel__title--big" >Ozono</h2>
+                <span> Regular </span>  
+            </div>
+              <div class="flex-container contaminatLevel__gauge"  >
+                     <ngx-gauge  
+                          [value]="o3value"
+                           type="arch"
+                           [thick]="11"
+                           cap="round"
+                           [max]=1000
+                           [size]=200
+                         
+                           foregroundColor="#0077b6"
+                          [duration]="1500"
+                           label="ppb"
+                
+                          >
+                        </ngx-gauge>
+              </div>
+              <p>Promedio horario </p>
+            </div>
         
-
-
-              </div> <!-- Gauge Left -->
-          </div>
-      </div>
-<!-- weather-info es el contenedor padre de la otra sección, es decir contiene la temperatura, la grafica y la tabla de precipitación y tds -->
-      <div class="weather-info">
-          <div class="weather-info__real-time">
-              <div class="weather-info__real-time-data">
-                <div class="flex-container" >
-                  <h4 class="contaminatLevel__title contaminatLevel__title--small" >Temperature</h4>
-                  <span>Calido</span>
-                </div>
-                
-                  <!-- aquí vas  a colocar la temperatura en tiempo real -->
-                  <div class="flex-container contaminatLevel--height100" >
-                   
-                          <div class="contaminatLevel--mediumWidth" style="align-self: start;" >
-                               
-                                 
-                                  <div class="contaminatLevel__gauge">
-                                    
-                                            <ngx-gauge
-                                              [value]="temperatureValue"
-                                              type="arch"
-                                              [thick]="8"
-                                              cap="round"
-                                              [max]=50
-                                              [size]=73
-                                              backgroundColor = "rgba(0, 0, 0)"
-                                              foregroundColor="#fe6385"
-                                              >
-                                            </ngx-gauge>
-                                            <span class="contaminatLevel__levelUnit" >C°</span>
-                                  </div>
-                
-                          </div>
-                          <div class="contaminatLevel--mediumWidth" style="align-self: start; justify-content: center; margin-top: 6px; " >
-                    
-                              <span style="font-size: 13px; display:block" > Pres: {{pressureValue}} hpa</span>
-                              <span style="font-size: 13px"  > Alt: {{altitudeValue}} msnm</span>
-                              
-                          </div>
-                  </div>
-
-              </div> <!-- Fin de la etiqueta weather-info__real-time-data  -->
-              <div class="weather-info__real-time-container-data">
-                  <!-- Aquí esta la grafica de chart  -->
-                  <div class= "chart-Temperature" >
-                    <canvas id="ctx"  ></canvas>
-                  </div>
+        
+    </div>
+    <div class="containergrid">
+       <div class="gauge__container">      
+            <div class="flex-container" >
+                <h2 class="contaminatLevel__title contaminatLevel__title--big" >Dioxido de carbono</h2>
+                <span> Regular </span>  
+            </div>
+              <div class="flex-container contaminatLevel__gauge"  >
+                       <ngx-gauge
+                                  [value]="co2value"
+                                  type="arch"
+                                  [thick]="10"
+                                  cap="round"
+                                  [max]=1100
+                                  [size]=200
+                                
+                                  foregroundColor="#0077b6"
+                                  label="ppm"
+                                  >
+              </ngx-gauge>
               </div>
-          </div>
-          <!-- **** SECION DE TDS Y  PRECIPITACION  -->
-          <div class="weather-info__real-time">
-            <!-- TIEMPO REAL -PRECIPITACIÓN TDS -->
-            <div class="weather-info__real-time-data">
-              <div class="weather-info__real-time-data--rain">
-                  <span class="weather-info__label">
-                      <span class="weather-info__label--bold">Precip.</span> 
-                      {{precipitacion_tr}} ml2
-                  </span>
+            </div>
+    </div>
 
-                <!-- medidor de tds  -->
-                  <div class="contaminatLevel--rain contaminatLevel--mediumWidth">
-                            <!-- titulo del medidor de tds  -->
-                            <div class="flex-container" >
-                                <h4 class="contaminatLevel__title contaminatLevel__title--small">TDS</h4>
-                                <span class="contaminatLevel__text" > Malo </span> 
-                            </div>
-                            
-                            <div class="contaminatLevel__gauge">
-                                    <!-- aquí esta el medidor de pm 1 para visualizar los dato en tiempo real -->
-                                        <ngx-gauge
-                                        [value]="1000"
+ <h3  >Precipitación en un plazo de 24hrs </h3>
+
+
+
+      <div class="containergrid">
+      <div class="gauge__container">      
+        <div class="flex-container" >
+            <h2 class="contaminatLevel__title contaminatLevel__title--big" >Precipitación</h2>
+            <span> Regular </span>  
+        </div>
+          <div class="flex-container contaminatLevel__gauge"  >
+                  <ngx-gauge
+                                        [value]="precipitacion_tr"
                                         type="arch"
-                                        [thick]="8"
+                                        [thick]="11"
                                         cap="round"
                                         [max]=1200
-                                        [size]=73
-                                        backgroundColor = "rgba(0, 0, 0, 0.5)"
+                                        [size]=200
+                                
                                         foregroundColor="#3c5a6f"
                                         >
                                         </ngx-gauge>
-                                        <!-- <span class="contaminatLevel__levelUnit" >ug/m3 </span> -->
-                            </div>
-                            <!-- Esta etiqueta me permite determinar que tan peligrosa es el contaminate -->
-                            
-                  </div>
-
-              </div>
-              <span class="weather-info__update-time">Último Registro: 2023/09/23 </span>
-            </div>
-          
-              <div class="weather-info__real-time-container-data">
-                <!-- Aquí la tabla de lluvia y tds -->
-                <table class="tabla-LLuvia">
-                  <thead>
-                    <tr>
-                      <th>Lm2</th>
-                      <th>Tds</th>
-                      <th>Fecha</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr  >
-                      <td > 5.5</td>
-                      <td> 123 </td>
-                      <td> 03:00</td>
-                    </tr>
-                    <tr  >
-                      <td > 5.5</td>
-                      <td> 123 </td>
-                      <td> 03:00</td>
-                    </tr>
-                    <tr  >
-                      <td > 5.5</td>
-                      <td> 123 </td>
-                      <td> 03:00</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
           </div>
-      </div>
-      
+        </div>
+        <div class="gauge__container">      
+          <div class="flex-container" >
+              <h2 class="contaminatLevel__title contaminatLevel__title--big" >TDS</h2>
+              <span> Regular </span>  
+          </div>
+            <div class="flex-container contaminatLevel__gauge"  >
+                    <ngx-gauge
+                                        [value]="tds_tr"
+                                        type="arch"
+                                        [thick]="11"
+                                        cap="round"
+                                        [max]=1200
+                                        [size]=200
+                                        
+                                        foregroundColor="#3c5a6f"
+                                        >
+                                        </ngx-gauge>
+            </div>
+          </div>
+         
+            
+        
+    </div>
 
-
+ 
 </div>
-
-
-
-    
-</div>
-
-
-
 
 

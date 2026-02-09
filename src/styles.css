@@ -19,10 +19,11 @@ background: linear-gradient(to right, #414345, #232526);
 
 */
 body{
-  background: #0A090C ;
+  background: #eaeaea ;
 
 
   font-family: 'Hanken Grotesk', sans-serif;
+  color:#7d7d7d;
 /*overflow: hidden;
 
 linear-gradient(to right, rgb(15, 23, 42), rgb(88, 28, 135), rgb(15, 23, 42))
