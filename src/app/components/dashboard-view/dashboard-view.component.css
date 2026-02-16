@@ -2,6 +2,81 @@ html{
   font-size: 16px;
   color:white;
 }
+body{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+
+}
+.contenedor-barra{
+  width: 100%;
+    background-color: white;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.barra{
+    width: 90%;
+    height: 70px;
+  margin:  0 auto;
+  display: flex;
+  justify-content: space-between;
+     align-items: center;
+}
+.img-titulo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.img-barra{
+  width: 60px;
+  height: auto;
+  object-fit: cover;
+  gap: 20;
+ 
+  border-radius: 10px;
+}
+.advertencia{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  padding: 10px;
+  margin: 5px 0px 5px 0px;
+  font-size: small;
+  gap: 20px;
+}
+.material-icons{
+  font-size: 16px;
+}
+.resumen{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 5px 0px 5px 0px;
+  font-size:medium;
+  gap: 20px;
+  background: linear-gradient(
+    to right,
+    rgba(255,193,7,0.25),
+    rgba(255,193,7,0.8)
+  );
+}
+/*
+.material-icons {
+  font-size: 32px;
+  color: green;
+}
+*/
+.imagenes-svg{
+  width:40px;
+  height: auto;
+    color: #fe6385;   /* ahora sí cambia el color */
+
+}
 
 .containergrid{
 
@@ -14,7 +89,7 @@ html{
   
 }
 .container-pattern{
-  width: 95%;
+  width: 90%;
   height: 100vh;
   margin:  0 auto;
  
@@ -49,12 +124,9 @@ html{
 
 }
 h3{
-  text-align: center;
-  background: white;
-  min-width: 20%;
-  max-width: 1fr;
-  padding: 10px;
-  margin: 10px;
+  text-align: start;
+ 
+  font-size: 24px;
   
 }
 table {

@@ -22,8 +22,8 @@ body{
   background: #eaeaea ;
 
 
-  font-family: 'Hanken Grotesk', sans-serif;
-  color:#7d7d7d;
+ font-family: 'Inter', sans-serif;
+    font-style: normal;
 /*overflow: hidden;
 
 linear-gradient(to right, rgb(15, 23, 42), rgb(88, 28, 135), rgb(15, 23, 42))

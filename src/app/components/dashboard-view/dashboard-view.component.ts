@@ -78,13 +78,14 @@ constructor( private socket : SocketServerService , private data_fetch_service :
     console.log("este es el mensaje que manda el servidor",msg);
    });
 this.socket.getGrupoADataSocket().subscribe((message:any)=>{
-    this.temperatureValue = message.temperature;
+    this.temperatureValue = Number( message.temperature);
     this.pressureValue = message.pressure;
     this.altitudeValue = message.altitud;
    // this.pm1 = message.pm10_env ;
    // this.pm2_5 = message.pm25;
    // this.pm10= message.pm100_env  ;
-    this.ryValue =  message.uv;
+        this.ryValue =Number(  message.uv);
+
     this.windSpeed = message.windSpeed;
     this.o3value = message.ozono;
     this.co2value = message.co2;
@@ -99,15 +100,16 @@ this.socket.getGrupoADataSocket().subscribe((message:any)=>{
         hour :'2-digit',
         minute:'2-digit',
      });
-
+this.configuracionTemperatura();
+this.configuracionUV();
 });
 this.socket.getGrupoBDataSocket().subscribe((message:any)=>{
 
-      this.temperatureValue = message.temperature;
+     this.temperatureValue = Number( message.temperature);
     this.pressureValue = message.pressure;
     this.altitudeValue = message.altitud;
   
-    this.ryValue =  message.uv;
+    this.ryValue =Number(  message.uv);
     this.windSpeed = message.windSpeed;
     this.o3value = message.ozono;
     this.co2value = message.co2;
@@ -134,18 +136,18 @@ this.socket.getGrupoBDataSocket().subscribe((message:any)=>{
     console.log(message.air_quality);
     console.log(message.UVray); */
       console.log("esto que es ",message);
-    this.temperatureValue = message.temperature;
+    this.temperatureValue = Number( message.temperature);
     this.pressureValue = message.pressure;
     this.altitudeValue = message.altitud;
     this.pm1 = message.pm10_env ;
     this.pm2_5 = message.pm25;
     this.pm10= message.pm100_env  ;
-    this.ryValue =  message.uv;
+    this.ryValue =Number(  message.uv);
     this.windSpeed = message.windSpeed;
     this.o3value = message.ozono;
     this.co2value = message.co2;
     this.directionSocket = message.direction;
-    this.humedad = message.humedad;
+    this.humedad =  message.humedad;
     this.tds_tr  = message.tds;
     this.precipitacion_tr =message.lm2;
     this.registroLluvia = message.ultimoRegistroHora; 
@@ -156,7 +158,8 @@ this.socket.getGrupoBDataSocket().subscribe((message:any)=>{
         minute:'2-digit',
      });
 
-
+this.configuracionTemperatura();
+this.configuracionUV();
    });
 
 }
@@ -166,11 +169,10 @@ ngOnInit(): void {
 
   /* aquí estan los datos que han sido acumulados */
   this.socket.accumulatedData().subscribe((message:any) => {
-    this.temperatureValue = message.temperature;
-    console.log("<- temperatureValue--> ",this.temperatureValue);
+    this.temperatureValue = Number( message.temperature);
     this.pressureValue = message.pressure;
     this.altitudeValue = message.altitud;
-    this.ryValue = message.uv;
+    this.ryValue =Number(  message.uv);
     this.pm1 = message.pm10_env ;
     this.pm2_5 = message.pm25;
     this.pm10= message.pm100_env;
@@ -183,7 +185,11 @@ ngOnInit(): void {
     this.precipitacion_tr =message.lm2;
     this.registroLluvia = message.ultimoRegistroHora; 
 
-    
+    this.configuracionTemperatura();
+    this.configuracionUV();
+    this.configuracionPresion(Number(this.pressureValue));
+this.configuracionAltitud(Number(this.altitudeValue));
+
   });
 
 this.data_fetch_service.obtenerPromedioOzono().subscribe(respuesta=>{
@@ -210,13 +216,143 @@ this.data_fetch_service.obtenerRainDatos().subscribe(respuesta=>{
 }
 ngAfterViewInit():void {
   // Código para el método AfterViewInit
+ this.configuracionTemperatura();
+this.configuracionHumedadRelativa(Number(this.humedad));
+this.configuracionPresion(Number(this.pressureValue));
+this.configuracionAltitud(Number(this.altitudeValue));
+}
+
+
+temperaturaColor:string ="";
+temperaturaDescripcion:string="";
+configuracionTemperatura(){
+  if (this.temperatureValue<= 0 )  {
+      // muy frio #0033CC
+this.temperaturaColor = "#0033CC";
+this.temperaturaDescripcion = "Muy frio"
+  }
+  else if(this.temperatureValue >0 && this.temperatureValue <=10){
+// Frio #3399FF
+this.temperaturaColor = "#3399FF";
+this.temperaturaDescripcion = "Frio";
+  }
+    else if(this.temperatureValue >10 && this.temperatureValue <=20){
+//Fresco #33CCCC
+this.temperaturaColor = "#33CCCC";
+this.temperaturaDescripcion = "Fresco";
+  }
+    else if(this.temperatureValue >20 && this.temperatureValue <=25){
+// #2ECC71 Templada
+console.log("Se supone que debe entrar aquí");
+this.temperaturaColor = "#2ECC71";
+this.temperaturaDescripcion = "Templado";
+  } else if(this.temperatureValue >25 && this.temperatureValue <=30){
+// Cálida #F1C40F
+this.temperaturaColor = "#F1C40F";
+this.temperaturaDescripcion = "Calido";
+  }else if(this.temperatureValue >30 && this.temperatureValue <=35){
+// Calurosa Calurosa
+this.temperaturaColor = "#E67E22";
+this.temperaturaDescripcion = "Calurosa";
+  }
+  else if(this.temperatureValue >35 ){
+// ##E74C3C Muy calurosa
+this.temperaturaColor = "#E74C3C";
+this.temperaturaDescripcion = "Muy Calurosa";
+  }
+
+}
+colorHumedad:string="";
+descripcionHumedad:string ="";
+configuracionHumedadRelativa( humedad:number){
+if (humedad <= 30) {
+  this.colorHumedad="#F7DC6F";
+  this.descripcionHumedad="Muy seca";
+}else if(humedad > 30 && humedad <=40 ){
+this.colorHumedad="#F4D03F";
+  this.descripcionHumedad="Seca";
+}else if(humedad > 40 && humedad <=60 ){
+this.colorHumedad="#27AE60";
+  this.descripcionHumedad="Confortable";
+}else if(humedad > 60 && humedad <=70 ){
+this.colorHumedad="#5DADE2";
+  this.descripcionHumedad="Húmeda";
+}else if(humedad > 70 ){
+this.colorHumedad="#1F618D";
+  this.descripcionHumedad="Muy húmedo";
+}
+
+}
+colorUv:string="";
+descripcionUv:string="";
+configuracionUV(){
+  if (this.ryValue >= 0 && this.ryValue <= 2) {
+    this.colorUv = "#2ECC71";
+    this.descripcionUv = "Bajo";
+  }else if(this.ryValue>=3 && this.ryValue <=5){
+this.colorUv = "#F1C40F";
+    this.descripcionUv = "Moderado";
+  }  else if(this.ryValue>=6 && this.ryValue <=7){
+    this.colorUv = "#E67E22";
+    this.descripcionUv = "Alto";
+  }else if(this.ryValue>=8 && this.ryValue <= 10){
+    this.colorUv = "#E74C3C";
+    this.descripcionUv = "Muy Alto";
+  }else if(this.ryValue >=11 ){
+    this.colorUv = "#8E44AD";
+    this.descripcionUv = "Muy Alto";
+  }
+}
+presionColor:string="";
+presionDescripcion:string="";
+configuracionPresion(presion:number){
+if (presion>1020) {
+  this.presionColor="#2E86C1";
+  this.presionDescripcion = "Alta presión";
+}else if(presion>=1010 ){
+ this.presionColor="#27AE60";
+  this.presionDescripcion = "Normal alta";
+}else if(presion>=1000){
+ this.presionColor="#F1C40F";
+  this.presionDescripcion = "Normal baja";
+}else if(presion>=900 && presion <1000 ){
+ this.presionColor="#E67E22";
+  this.presionDescripcion = "Baja presión";
+}else if(presion<900){
+ this.presionColor="#C0392B";
+  this.presionDescripcion = "Muy baja";
+}
+
+}
+altitudColor:string="";
+altitudDescripcion:string="";
+configuracionAltitud(altitud:number){
+if (altitud>=0 && altitud <=500) {
+  this.altitudColor = "#2ECC71";
+  this.altitudDescripcion="Baja";
+}else if (altitud>500 && altitud <=1500) {
+this.altitudColor = "#F1C40F";
+  this.altitudDescripcion="Media";
+}else if (altitud>1500 && altitud <=2500) {
+    this.altitudColor = "#E67E22";
+  this.altitudDescripcion="Moderada";
+}else if (altitud>2500 && altitud <=3500) {
+  this.altitudColor = "#E74C3C";
+  this.altitudDescripcion="Alta";
+}else if (altitud >3500) {
+  this.altitudColor = "#8E44AD";
+  this.altitudDescripcion="Alta";
+}
+
+}
+
 
 }
 
 
 
 
-}
+
 
 
 /*
